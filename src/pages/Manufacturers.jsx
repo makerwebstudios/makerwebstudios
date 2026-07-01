@@ -15,12 +15,7 @@ const ArrowRight = ({ size = 24, className = "" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
 );
 
-// Stripe checkout + booking links
-const STRIPE_FOUNDATION = "https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04";
-const STRIPE_CAREPLAN = "https://buy.stripe.com/5kQfZjcjv4Ao9K4aKpejK05";
-const CALENDLY = "https://calendly.com/hello-makerwebstudios/30min";
-
-const Home = () => {
+const Manufacturers = () => {
   return (
     <div id="home" className="fade-in">
 
@@ -33,55 +28,53 @@ const Home = () => {
             {/* Authority badge -- social proof above the fold (#4) + telling who it's for (#9) */}
             <div className="hero-authority-badge reveal-anim visible" style={{ animationDelay: "0.05s" }}>
               <span className="auth-dot" />
-              Built by an operator &mdash; 16 years running a real business
+              Built with 16 years of manufacturing experience
             </div>
 
             <h1 className="hero-title reveal-anim visible" style={{ animationDelay: "0.1s" }}>
-              Your entire online presence.<br />
-              <span className="text-accent">Consolidated. Cohesive. Proven.</span>
+              The Revenue Builder System<br />
+              <span className="text-accent">For Texas Manufacturers.</span>
             </h1>
             <p className="hero-subtitle reveal-anim visible" style={{ animationDelay: "0.15s", fontSize: "1.5rem", color: "var(--industrial-orange)", fontWeight: "700", fontFamily: "'Outfit', sans-serif", marginBottom: "1.5rem", maxWidth: "750px", marginLeft: "auto", marginRight: "auto" }}>
-              One system for your brand, your website, and your Google presence.
+              Your website should work as hard as your plant does.
             </p>
             <p className="hero-subtext reveal-anim visible" style={{ animationDelay: "0.2s" }}>
-              For business owners whose online presence doesn&rsquo;t match the quality of their work. <strong>Foundation</strong> consolidates your branding, your website, and your entire Google presence into one clear, high-performing system &mdash; built from your <em>why</em>, out. New brand, tired brand, or thriving brand: we meet you where you are.
+              For Texas manufacturers doing $500K&ndash;$10M in annual revenue with outdated websites that don&rsquo;t generate leads. We install the digital infrastructure your competitors already have &mdash; starting with a website that converts and ending with a company worth selling.
             </p>
             <div className="hero-actions reveal-anim visible" style={{ animationDelay: "0.3s", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", maxWidth: "440px", margin: "0 auto", width: "100%" }}>
               <a
-                href={STRIPE_FOUNDATION}
+                href="https://calendly.com/hello-makerwebstudios/30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary btn-lg-premium"
                 style={{ width: "100%", textAlign: "center" }}
               >
-                Start Your Foundation &mdash; $2,500 &rarr;
+                Get My Free Website Audit &rarr;
               </a>
               <a
-                href={CALENDLY}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#system"
                 className="btn btn-dark btn-lg-premium"
                 style={{ width: "100%", textAlign: "center" }}
               >
-                Book a Free Audit
+                See Everything Inside The System
               </a>
 
               {/* Reassurance under primary CTA (#50) + expectation setting (#59) */}
               <p className="hero-reassurance">
-                No pitch. No commitment. Just an honest 15-minute audit showing exactly where your online presence is leaking &mdash; delivered within 48 hours.
+                No sales pitch. No commitment. Just an honest 15-minute audit of what your digital presence is costing you &mdash; delivered within 48 hours.
               </p>
             </div>
 
             {/* Gradual engagement (#22) -- micro-commitment for visitors not ready to book */}
             <p className="hero-microcommit reveal-anim visible" style={{ animationDelay: "0.35s" }}>
-              Not ready to talk yet? <a href="#system">See what&rsquo;s inside Foundation first &rarr;</a>
+              Not ready to talk yet? <a href="#system">Read how the system works first &rarr;</a>
             </p>
 
             <div className="hero-badges reveal-anim visible" style={{ animationDelay: "0.4s", marginTop: "4rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem 2rem", justifyItems: "center", textAlign: "center", width: "100%", maxWidth: "500px", marginLeft: "auto", marginRight: "auto" }}>
-              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>Any Industry</div>
-              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>Bilingual EN &amp; ES</div>
-              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>16 Years Operating</div>
-              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>90-Day Guarantee</div>
+              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>Texas Manufacturers</div>
+              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>ISO &amp; GMP Specialists</div>
+              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>16 Years on the Shop Floor</div>
+              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>90-Day Lead Guarantee</div>
             </div>
           </div>
         </div>
@@ -270,7 +263,7 @@ const Home = () => {
             letterSpacing: "-0.02em",
             margin: 0,
           }}>
-            &ldquo;Your online presence should work as hard as you do.&rdquo;
+            &ldquo;Your website should work as hard as your plant does.&rdquo;
           </p>
         </div>
       </section>
@@ -287,10 +280,10 @@ const Home = () => {
               The Reality
             </div>
             <h2 className="section-title" style={{ color: "white", marginBottom: "1.5rem" }}>
-              You built something real. Your online presence doesn&rsquo;t show it.
+              You built a serious operation. Your website doesn't show it.
             </h2>
             <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1.125rem", maxWidth: "800px", lineHeight: "1.75" }}>
-              Most businesses have a presence that grew by accident &mdash; a website built once and never touched, a Google profile half-filled, an Instagram that says one thing and a site that says another. No cohesion. No lead capture. No clear reason for a customer to choose you. Meanwhile competitors &mdash; even the ones with half your quality &mdash; show up first on Google, look polished, and win the click while you wait for the phone to ring. That&rsquo;s not a product problem. That&rsquo;s a presence problem. And it&rsquo;s fixable.
+              Most manufacturers in Texas have websites that were built once and never touched again. No SEO. No lead capture. No credibility signal for buyers doing due diligence. Meanwhile, your competitors &mdash; even the ones with half your capabilities &mdash; are showing up first on Google, presenting their certifications front and center, and converting visitors into quote requests while you're waiting for the phone to ring. That's not a product problem. That's a digital presence problem. And it's fixable.
             </p>
           </div>
 
@@ -309,22 +302,22 @@ const Home = () => {
               How We Got Here
             </div>
             <h2 className="section-title" style={{ marginBottom: "2rem", fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: "1.1" }}>
-              I built a $1.5M operation from $350K.
+              I built a $1.5M manufacturing facility from $350K.
             </h2>
           </div>
 
           <div style={{ fontSize: "1.125rem", lineHeight: "1.85", color: "var(--text-muted)" }}>
             <p style={{ marginBottom: "1.5rem" }}>
-              Before Maker Web Studios, I ran a regulated manufacturing operation with complete GMP and ISO frameworks built from the ground up in Texas. 17 employees. 70+ documented procedures. Six simultaneous certifications. We grew from $350,000 to $1.5 million in revenue across four years.
+              Before Maker Web Studios, I ran a manufacturing operation with complete GMP and ISO frameworks built from the ground up in Texas. 17 employees. 70+ documented procedures. Six simultaneous regulatory certifications. We grew from $350,000 to $1.5 million in revenue across four years.
             </p>
             <p style={{ marginBottom: "1.5rem" }}>
-              When I looked at how business owners were finding customers in 2026, I saw the same gap everywhere: serious operations with broken, scattered digital presences. Great companies invisible online. Owners with real reputations whose websites and profiles made them look small &mdash; customers Googling them and bouncing off a slow, dated, or inconsistent presence with no way to convert.
+              When I looked at how other Texas manufacturers were finding customers in 2026, I saw the same gap everywhere: serious operations with broken digital presences. ISO-certified facilities with websites that didn&rsquo;t mention ISO. Companies doing real work with no way for buyers to find them online. Procurement managers Googling suppliers and bouncing off PageSpeed scores below 30. No conversion potential through their web presence.
             </p>
             <p style={{ marginBottom: "1.5rem" }}>
-              That&rsquo;s the gap Maker Web Studios fixes &mdash; and it&rsquo;s why I built it the way I did. Not as a generic agency. As the operator&rsquo;s eye I wish every business had pointed at its brand, its website, and its Google presence.
+              That&rsquo;s the gap Maker Web Studios fixes &mdash; and it&rsquo;s why I built it the way I did. Not as a generic agency. As the digital infrastructure team I wish I&rsquo;d had when I was on the plant floor.
             </p>
             <p style={{ marginBottom: "0", fontStyle: "italic", color: "var(--text-dark)", fontWeight: "600" }}>
-              I&rsquo;m not a designer who read about business. I&rsquo;m an operator who learned to build brands and websites. The difference shows up in every conversation.
+              I&rsquo;m not a developer who learned about manufacturing. I&rsquo;m a manufacturer who learned to build websites. The difference shows up in every conversation.
             </p>
           </div>
 
@@ -332,7 +325,7 @@ const Home = () => {
             <p style={{ margin: 0, fontSize: "0.95rem", color: "var(--text-dark)", fontWeight: "600" }}>
               &mdash; Guillermo Aristi, Founder
               <span style={{ color: "var(--text-muted)", fontWeight: "500", marginLeft: "0.5rem" }}>
-                | 16 years operating | Design &middot; Web &middot; Manufacturing
+                | 16 years manufacturing | GMP &middot; ISO &middot; SQF &middot; QMS &middot; 6S
               </span>
             </p>
           </div>
@@ -342,19 +335,19 @@ const Home = () => {
 
 
       {/* ============================================================ */}
-      {/* SECTION 4 -- THE SYSTEM (FOUNDATION) */}
+      {/* SECTION 4 -- THE SYSTEM */}
       {/* ============================================================ */}
       <section id="system" style={{ padding: "8rem 0", background: "var(--bg-color)" }} className="blueprint-bg">
         <div className="container" style={{ maxWidth: "1100px" }}>
           <div style={{ marginBottom: "4rem" }}>
             <div className="badge-premium" style={{ color: "var(--industrial-orange)", background: "transparent", border: "none", padding: 0, marginBottom: "1rem" }}>
-              The Foundation Build
+              The Revenue Builder System
             </div>
             <h2 className="section-title" style={{ marginBottom: "1rem" }}>
-              One build. Your brand, your website, and your Google presence &mdash; consolidated.
+              One system. Eight deliverables. Built for manufacturers.
             </h2>
-            <p className="section-subtitle" style={{ maxWidth: "820px" }}>
-              Foundation isn&rsquo;t a website package. It&rsquo;s your entire online presence installed as one coherent system &mdash; built from your <em>why</em>, then made visible, cohesive, and measurable wherever customers find you.
+            <p className="section-subtitle" style={{ maxWidth: "800px" }}>
+              The Revenue Builder System is not a website package. It's a complete growth infrastructure &mdash; installed in your business, starting with your digital presence and scaling to every revenue-generating function you run.
             </p>
           </div>
 
@@ -362,43 +355,43 @@ const Home = () => {
             {[
               {
                 num: "01",
-                title: "Your Why & Positioning",
-                desc: "Who you're for and the one message that makes it obvious.",
+                title: "Digital Presence Audit",
+                desc: "Every gap costing you leads — found and documented.",
               },
               {
                 num: "02",
-                title: "Cohesive Brand & Identity",
-                desc: "A consistent look, voice, and message across every channel.",
+                title: "Blind Spot Audit",
+                desc: "What your competitors are doing that you're not.",
               },
               {
                 num: "03",
-                title: "Modern, Fast Website",
-                desc: "Responsive, clear, bilingual-ready — built to get found.",
+                title: "Market Analysis & 5-Year Forecast",
+                desc: "Your market landscape before you invest in it.",
               },
               {
                 num: "04",
-                title: "On-Page & Technical SEO",
-                desc: "Schema, sitemap, and structure so search can read you.",
+                title: "Revenue Growth Playbook",
+                desc: "More revenue from your existing operations.",
               },
               {
                 num: "05",
-                title: "Google Business Profile",
-                desc: "Claimed and fully optimized — photos, posts, reviews, Q&A.",
+                title: "Revenue Builder Playbook",
+                desc: "The master execution plan — what to build and in what order.",
               },
               {
                 num: "06",
-                title: "Analytics & Tag Manager",
-                desc: "GA4 + GTM wired so every visit and action is tracked.",
+                title: "Lead Flow Playbook",
+                desc: "Generate, capture, and convert inbound leads consistently.",
               },
               {
                 num: "07",
-                title: "Search Console + UTM",
-                desc: "Verified, submitted, and attributable across channels.",
+                title: "Revenue Model Playbook",
+                desc: "Your actual numbers modeled into targets you can hit.",
               },
               {
                 num: "08",
-                title: "30-Day Performance Report",
-                desc: "Before-and-after proof that the system is working.",
+                title: "Master Plan Roadmap",
+                desc: "12 months of execution tied into one sequenced plan.",
               },
             ].map((item, idx) => (
               <div key={idx} className="bento-card reveal-anim visible" style={{ animationDelay: `${0.05 * idx}s`, position: "relative" }}>
@@ -414,61 +407,27 @@ const Home = () => {
 
 
       {/* ============================================================ */}
-      {/* SECTION 4A -- THREE DOORWAYS */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--dark-bg)" }} className="dark-section blueprint-bg">
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
-            <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              Wherever your brand is today
-            </div>
-            <h2 className="section-title" style={{ color: "white", marginBottom: "1rem" }}>
-              Three ways in. One system underneath.
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.05rem", lineHeight: "1.8", maxWidth: "700px", margin: "0 auto" }}>
-              You don&rsquo;t need the jargon &mdash; just pick the one that sounds like you.
-            </p>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
-            {[
-              { title: "Brand-new brand", desc: "Launching something? We build it to look established, professional, and findable from day one — so you skip the “we look small” phase entirely." },
-              { title: "Dated or scattered", desc: "Old website, mismatched profiles, message all over the place? We consolidate it into one refreshed, cohesive presence that finally matches your work." },
-              { title: "Already winning", desc: "Doing well but leaking demand? We optimize every channel so the reputation you’ve earned actually converts — and defends your lead." },
-            ].map((d, i) => (
-              <div key={i} style={{ padding: "2rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "var(--border-radius)" }}>
-                <h3 style={{ fontSize: "1.35rem", fontWeight: "800", fontFamily: "'Outfit', sans-serif", color: "#fff", marginBottom: "0.75rem" }}>{d.title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.98rem", lineHeight: "1.65" }}>{d.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
       {/* SECTION 4B -- SEO / GEO / AIO */}
       {/* ============================================================ */}
       <section style={{ padding: "8rem 0", background: "var(--dark-bg)" }} className="dark-section blueprint-bg">
         <div className="container" style={{ maxWidth: "900px" }}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              How Customers Find You in 2026
+              How Buyers Find You in 2026
             </div>
             <h2 className="section-title" style={{ color: "white", marginBottom: "1.5rem" }}>
               SEO alone isn't enough anymore.
             </h2>
             <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.05rem", lineHeight: "1.8", maxWidth: "750px", margin: "0 auto" }}>
-              Your customers search on Google, ask ChatGPT, and check AI Overviews before they ever pick up the phone.
-              We build your presence to show up across all three.
+              Your buyers search on Google, ask ChatGPT, and check AI Overviews before they ever pick up the phone.
+              We build your digital presence to rank across all three.
             </p>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {[
               { abbr: "SEO", color: "var(--industrial-orange)", title: "Search Engine Optimization", desc: "Google and Bing rankings. Keywords, schema, backlinks, service pages. Still 80% of search traffic." },
-              { abbr: "GEO", color: "#10b981", title: "Generative Engine Optimization", desc: "Getting cited by ChatGPT, Perplexity, and Claude when customers ask AI for recommendations in your category." },
+              { abbr: "GEO", color: "#10b981", title: "Generative Engine Optimization", desc: "Getting cited by ChatGPT, Perplexity, and Claude when buyers ask AI for recommendations in your category." },
               { abbr: "AIO", color: "#6366f1", title: "AI Overview Optimization", desc: "Showing up in Google's AI summary box — which now appears on 88% of informational searches." },
             ].map((item, i) => (
               <div key={i} style={{
@@ -499,7 +458,7 @@ const Home = () => {
       <section style={{ padding: "6rem 0", background: "var(--bg-color)", textAlign: "center" }}>
         <div className="container" style={{ maxWidth: "900px" }}>
           <h2 className="section-title" style={{ color: "var(--text-dark)", fontSize: "clamp(1.75rem, 4vw, 2.75rem)", lineHeight: "1.2", fontFamily: "'Outfit', sans-serif", fontWeight: "900", margin: "0 auto", maxWidth: "800px" }}>
-            Most agencies optimize for Google alone. We optimize for every system your customer uses to make a decision.
+            Most agencies optimize for Google alone. We optimize for every system your buyer uses to make a decision.
           </h2>
         </div>
       </section>
@@ -507,29 +466,31 @@ const Home = () => {
 
 
       {/* ============================================================ */}
-      {/* SECTION 5 -- VALUE STACK / PRICING */}
+      {/* SECTION 5 -- VALUE STACK */}
       {/* ============================================================ */}
-      <section id="pricing" style={{ padding: "8rem 0", background: "var(--dark-bg)" }} className="dark-section blueprint-bg">
+      <section style={{ padding: "8rem 0", background: "var(--dark-bg)" }} className="dark-section blueprint-bg">
         <div className="container" style={{ maxWidth: "900px" }}>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
               What It's Worth
             </div>
             <h2 className="section-title" style={{ color: "white", marginBottom: "1rem" }}>
-              Everything inside Foundation
+              Total Value of The Revenue Builder System
             </h2>
           </div>
 
           <div className="value-line-items" style={{ marginBottom: "3rem" }}>
             {[
-              { label: "Brand, Message & Identity Direction", value: "$3,000" },
-              { label: "Modern, Responsive Website Build", value: "$4,500" },
-              { label: "On-Page & Technical SEO", value: "$1,500" },
-              { label: "Google Business Profile Optimization", value: "$1,500" },
-              { label: "GA4 + Tag Manager + Search Console Setup", value: "$1,200" },
-              { label: "Citation / NAP Audit & Cleanup", value: "$800" },
-              { label: "Bilingual (EN/ES) Layer", value: "$1,500" },
-              { label: "30-Day Performance Report", value: "$500" },
+              { label: "Revenue Engine Website Build", value: "$4,500" },
+              { label: "Digital Presence Audit", value: "$1,500" },
+              { label: "Blind Spot Audit", value: "$1,500" },
+              { label: "Market Analysis & 5-Year Forecast", value: "$2,500" },
+              { label: "Revenue Growth Playbook", value: "$2,000" },
+              { label: "Revenue Builder Playbook", value: "$2,500" },
+              { label: "Lead Flow Playbook", value: "$2,000" },
+              { label: "Revenue Model Playbook", value: "$2,500" },
+              { label: "Master Plan Roadmap", value: "$1,500" },
+              { label: "12-Month Revenue Builder Retainer", value: "$18,000" },
             ].map((item, idx) => (
               <div key={idx} className="value-line-item">
                 <span style={{ color: "rgba(255,255,255,0.75)", fontSize: "1.05rem", fontWeight: "500" }}>{item.label}</span>
@@ -541,7 +502,7 @@ const Home = () => {
           {/* Total */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.5rem 0", borderTop: "2px solid var(--industrial-orange)", marginBottom: "3rem" }}>
             <span style={{ color: "white", fontSize: "1.25rem", fontWeight: "700" }}>Total Value</span>
-            <span style={{ color: "var(--industrial-orange)", fontSize: "2rem", fontWeight: "900", fontFamily: "'Outfit', sans-serif" }}>$14,500</span>
+            <span style={{ color: "var(--industrial-orange)", fontSize: "2rem", fontWeight: "900", fontFamily: "'Outfit', sans-serif" }}>$38,500</span>
           </div>
 
           {/* Investment */}
@@ -550,27 +511,24 @@ const Home = () => {
               Your Investment
             </p>
             <div style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: "900", fontFamily: "'Outfit', sans-serif", color: "white", lineHeight: "1.2" }}>
-              $2,500 <span style={{ color: "rgba(255,255,255,0.4)", fontWeight: "500", fontSize: "1.25rem" }}>to build it</span> + $500/mo <span style={{ color: "rgba(255,255,255,0.4)", fontWeight: "500", fontSize: "1.25rem" }}>to keep it working</span>
+              $4,500 <span style={{ color: "rgba(255,255,255,0.4)", fontWeight: "500", fontSize: "1.25rem" }}>to build it</span> + $1,500/mo <span style={{ color: "rgba(255,255,255,0.4)", fontWeight: "500", fontSize: "1.25rem" }}>to grow it</span>
             </div>
             <p style={{ color: "var(--industrial-orange)", fontSize: "0.95rem", fontWeight: "600", marginTop: "1.5rem", marginBottom: "0" }}>
-              The Care Plan keeps your presence secure, current, and visible every month &mdash; and protects your Foundation.
+              Price increases to $6,000 in June 2026 when the Sales Training module launches.
             </p>
           </div>
 
-          {/* CTAs -- both Stripe links wired here */}
+          {/* CTAs (#18 Benefit Buttons, #50 Reassurances, #59 Expectation Setting) */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", maxWidth: "440px", margin: "0 auto", width: "100%" }}>
-            <a href={STRIPE_FOUNDATION} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: "1.25rem 2.5rem", fontSize: "1.0625rem", width: "100%", textAlign: "center", fontWeight: "800" }}>
-              Start Your Foundation &mdash; $2,500 &rarr;
+            <a href="https://calendly.com/hello-makerwebstudios/30min" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: "1.25rem 2.5rem", fontSize: "1.0625rem", width: "100%", textAlign: "center", fontWeight: "800" }}>
+              Book a 15-Minute Strategy Call &rarr;
             </a>
-            <a href={STRIPE_CAREPLAN} target="_blank" rel="noopener noreferrer" className="btn" style={{ padding: "1rem 2.5rem", fontSize: "0.95rem", background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.25)", width: "100%", textAlign: "center", fontWeight: "600" }}>
-              Add the Care Plan &mdash; $500/mo
-            </a>
-            <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="btn" style={{ padding: "0.85rem 2.5rem", fontSize: "0.9rem", background: "transparent", color: "rgba(255,255,255,0.7)", border: "none", width: "100%", textAlign: "center", fontWeight: "600", textDecoration: "underline" }}>
-              Prefer to talk first? Book a free audit &rarr;
+            <a href="https://buy.stripe.com/5kQ6oJ6Zb2sg5tO3hXejK01" target="_blank" rel="noopener noreferrer" className="btn" style={{ padding: "1rem 2.5rem", fontSize: "0.95rem", background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.25)", width: "100%", textAlign: "center", fontWeight: "600" }}>
+              Skip the call &mdash; Lock in $4,500 build now
             </a>
 
             <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", lineHeight: "1.55", textAlign: "center", margin: "0.75rem 0 0", maxWidth: "440px" }}>
-              Ready to grow harder? <strong style={{ color: "rgba(255,255,255,0.75)" }}>GrowthEngine</strong> ($1,200&ndash;$1,800/mo) adds full SEO, content, backlinks, and lead generation on top of your Foundation.
+              The strategy call is 15 minutes, not 45. We&rsquo;ll talk through your current site, what&rsquo;s missing, and whether the Revenue Builder System is a fit. No pressure either way.
             </p>
           </div>
         </div>
@@ -605,15 +563,15 @@ const Home = () => {
               </p>
             </div>
 
-            {/* 90-Day Impressions Guarantee */}
+            {/* 90-Day Lead Guarantee */}
             <div className="bento-card reveal-anim visible" style={{ border: "2px solid var(--industrial-orange)" }}>
               <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", marginBottom: "1rem", color: "var(--industrial-orange)", opacity: 0.35, fontFamily: "'Outfit', sans-serif", lineHeight: 1 }}>
                 <span style={{ fontSize: "2.5rem", fontWeight: "900" }}>90</span>
                 <span style={{ fontSize: "1rem", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase" }}>Day</span>
               </div>
-              <h3 style={{ fontSize: "1.25rem", color: "var(--text-dark)", marginBottom: "1rem", fontWeight: "700" }}>Confidence Guarantee</h3>
+              <h3 style={{ fontSize: "1.25rem", color: "var(--text-dark)", marginBottom: "1rem", fontWeight: "700" }}>Lead Guarantee</h3>
               <p style={{ color: "var(--text-muted)", lineHeight: "1.7", fontSize: "0.95rem" }}>
-                If your Google Search Console impressions don&rsquo;t increase by at least 50% within 90 days of launch, we keep working at no charge until they do.
+                We guarantee at least 1 qualified inbound lead within 90 days of launch. If we don't deliver, we keep working at no charge until you get one.
               </p>
             </div>
           </div>
@@ -648,7 +606,7 @@ const Home = () => {
               A process this thorough is rare. That's the point.
             </h2>
             <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.05rem", lineHeight: "1.8", maxWidth: "750px", margin: "0 auto" }}>
-              Most agencies hand you a website and disappear. We run a 16-phase delivery system &mdash; the same rigor Fortune 500 companies pay consultants to design, built for any business serious about being found.
+              Most agencies hand you a website and disappear. We run a 16-phase delivery system &mdash; the same rigor Fortune 500 companies pay consultants to design, built for manufacturers and industrial businesses in Texas.
             </p>
           </div>
 
@@ -724,11 +682,11 @@ const Home = () => {
             Portfolio
           </div>
           <h2 className="section-title" style={{ marginBottom: "1.5rem" }}>
-            Built for great businesses.<br />
-            <span className="text-accent">By an operator.</span>
+            Built for Manufacturers.<br />
+            <span className="text-accent">By a Manufacturer.</span>
           </h2>
           <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1.25rem", lineHeight: "1.75", maxWidth: "700px", marginBottom: "2.5rem" }}>
-            Restaurants, trades, manufacturers, studios, clubs &mdash; every project started the same way: a great business with an online presence that undersold it.
+            Every project started the same way: a great company with a terrible website.
           </p>
           <a
             href="/portfolio"
@@ -753,19 +711,19 @@ const Home = () => {
               Why Maker Web Studios
             </div>
             <h2 className="section-title" style={{ color: "white", marginBottom: "1.5rem" }}>
-              An operator who brands &mdash; not a coder who guessed.
+              Built by someone who's been on your plant floor.
             </h2>
             <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1.125rem", lineHeight: "1.75", maxWidth: "800px" }}>
-              Maker Web Studios was founded by Guillermo Aristi &mdash; a 16-year veteran who built and exited a regulated manufacturing operation in Texas, with GMP, ISO 9001, and SQF certifications. This isn&rsquo;t an agency that learned about business from a Google search. &ldquo;Niche down&rdquo; from a designer is a slogan; the same call from someone who&rsquo;s run the floor &mdash; margins, SKUs, supply chain, unit economics &mdash; is consulting. We understand the business behind the brand, which is why owners who make and sell real things come to us specifically. Design eye, web tech, and operator judgment &mdash; few people carry all three.
+              Maker Web Studios was founded by Guillermo Aristi &mdash; a 16-year manufacturing veteran with GMP, ISO 9001, and SQF certifications who built and exited a regulated manufacturing facility in Texas. This isn't an agency that learned about manufacturing from a Google search. We know what a maquila operation looks like. We've written SOPs, run HPLC analyses, and walked clean rooms. We know the difference between a COA and a batch record &mdash; and why your GMP and ISO certifications matter to a procurement manager doing supplier qualification. We know exactly where to put it on your homepage so they see it in the first 8 seconds. We speak manufacturer. Because we are one.
             </p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2rem" }}>
             {[
-              { num: "16", label: "Years Operating" },
+              { num: "16", label: "Years in Manufacturing" },
               { num: "3", label: "New Clients Per Month" },
-              { num: "90", label: "Day Confidence Guarantee" },
-              { num: "EN/ES", label: "Bilingual Builds" },
+              { num: "90", label: "Day Lead Guarantee" },
+              { num: "100%", label: "Texas Focused" },
             ].map((stat, idx) => (
               <div key={idx} style={{ textAlign: "center" }}>
                 <div style={{ fontSize: "2.5rem", fontWeight: "900", color: "var(--industrial-orange)", fontFamily: "'Outfit', sans-serif", lineHeight: "1" }}>{stat.num}</div>
@@ -787,29 +745,26 @@ const Home = () => {
             Limited Availability
           </div>
           <h2 className="section-title" style={{ color: "var(--text-dark)", textAlign: "center", marginBottom: "1.5rem", fontSize: "clamp(2.25rem, 5vw, 3.5rem)", lineHeight: "1.1", fontFamily: "'Outfit', sans-serif", fontWeight: "900" }}>
-            We only take 3 new Foundation clients per month.
+            We only take 3 new Revenue Builder clients per month.
           </h2>
           <p style={{ fontSize: "1.125rem", color: "var(--text-muted)", textAlign: "center", marginBottom: "2rem", lineHeight: "1.75", fontWeight: "500", opacity: 0.9, maxWidth: "650px" }}>
-            Not as a marketing tactic &mdash; as a quality commitment. Every client gets our full attention from discovery to launch. Three slots means your project never gets deprioritized.
+            Not as a marketing tactic &mdash; as a quality commitment. Every client gets our full attention from discovery to launch. Three slots means your project never gets deprioritized. The June 2026 price increase to $6,000 is real. If you&rsquo;re reading this before then, you&rsquo;re looking at the last months of the $4,500 build rate.
           </p>
 
           {/* Curiosity hook (#49) */}
           <div style={{ padding: "1.25rem 1.75rem", background: "rgba(255, 107, 0, 0.06)", border: "1px solid rgba(255, 107, 0, 0.2)", borderRadius: "var(--border-radius)", marginBottom: "2.5rem", maxWidth: "650px" }}>
             <p style={{ fontSize: "1rem", color: "var(--text-dark)", margin: 0, fontWeight: "600", lineHeight: "1.6" }}>
-              There&rsquo;s one thing missing from almost every business&rsquo;s online presence that&rsquo;s quietly costing them 30&ndash;40% of their inbound leads. We find it on the audit call. Ask about it.
+              There&rsquo;s one thing missing from almost every Texas manufacturer&rsquo;s website that&rsquo;s costing them 30&ndash;40% of their inbound leads. We find it on the audit call. Ask about it.
             </p>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", maxWidth: "440px", width: "100%" }}>
-            <a href={STRIPE_FOUNDATION} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: "1.25rem 3rem", fontSize: "1.125rem", fontWeight: "900", fontFamily: "'Outfit', sans-serif", borderRadius: "4px", width: "100%", textAlign: "center" }}>
-              Start Your Foundation &mdash; $2,500 &rarr;
-            </a>
-            <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="btn btn-dark" style={{ padding: "1rem 3rem", fontSize: "1rem", width: "100%", textAlign: "center", fontWeight: "700" }}>
-              Or claim my free 15-minute audit
+            <a href="https://calendly.com/hello-makerwebstudios/30min" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: "1.25rem 3rem", fontSize: "1.125rem", fontWeight: "900", fontFamily: "'Outfit', sans-serif", borderRadius: "4px", width: "100%", textAlign: "center" }}>
+              Claim My Free 15-Minute Audit &rarr;
             </a>
           </div>
           <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", marginTop: "1.25rem", opacity: 0.75, maxWidth: "550px", lineHeight: "1.6" }}>
-            No cost. No sales pitch. No commitment. Just a detailed look at what your online presence is costing you &mdash; delivered within 48 hours.
+            No cost. No sales pitch. No commitment. Just a detailed look at what your digital presence is costing you &mdash; delivered within 48 hours.
           </p>
         </div>
       </section>
@@ -817,7 +772,7 @@ const Home = () => {
       {/* Footer Line */}
       <div style={{ padding: "2rem 0", textAlign: "center", borderTop: "1px solid var(--border-color)", background: "var(--bg-color)" }}>
         <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", opacity: 0.6, margin: 0 }}>
-          &copy; 2026 Maker Web Studios. Foundation and the Revenue Builder System are frameworks of Maker Web Studios.
+          &copy; 2026 Maker Web Studios. The Revenue Builder System is a proprietary framework of Maker Web Studios.
         </p>
       </div>
 
@@ -825,4 +780,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Manufacturers;

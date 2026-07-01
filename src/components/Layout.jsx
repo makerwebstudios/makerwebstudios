@@ -42,12 +42,12 @@ const Layout = ({ children }) => {
             </a>
             <div className="nav-button-group">
               <a
-                href="https://buy.stripe.com/5kQ6oJ6Zb2sg5tO3hXejK01"
+                href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-sm btn-dark"
               >
-                Lock In $4,500 Build
+                Start Foundation &mdash; $2,500
               </a>
               <a
                 href="https://calendly.com/hello-makerwebstudios/30min"
@@ -55,7 +55,7 @@ const Layout = ({ children }) => {
                 rel="noopener noreferrer"
                 className="btn btn-sm btn-primary"
               >
-                Get My Free Audit
+                Free Audit
               </a>
             </div>
           </nav>
@@ -70,22 +70,25 @@ const Layout = ({ children }) => {
             <div className="footer-brand">
               <h3 className="footer-logo">MAKER WEB STUDIO</h3>
               <p className="footer-tagline">
-                Websites Built for Manufacturers.
+                Your whole online presence, consolidated.
                 <br />
-                16+ Years on the Shop Floor.
+                Built by an operator, not a template.
               </p>
             </div>
             <div className="footer-links">
               <h4>Quick Links</h4>
               <ul>
                 <li>
-                  <a href="/#process">How It Works</a>
-                </li>
-                <li>
-                  <a href="/#difference">About</a>
+                  <a href="/#system">What's Inside</a>
                 </li>
                 <li>
                   <a href="/#pricing">Pricing</a>
+                </li>
+                <li>
+                  <a href="/portfolio">Portfolio</a>
+                </li>
+                <li>
+                  <a href="/mfg">For Manufacturers</a>
                 </li>
               </ul>
             </div>
