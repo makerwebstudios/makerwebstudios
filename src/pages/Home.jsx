@@ -301,6 +301,7 @@ const Home = () => {
       <div className="prow"><span className="cn">Restaurants &amp; Food</span><span className="cd">The digital front door and ordering flow rebuilt so demand stops leaking.</span><span className="tag">Hospitality</span></div>
       <div className="prow"><span className="cn">Trades &amp; Home Services</span><span className="cd">A commodity trade site repositioned into a premium local brand.</span><span className="tag">Dated &rarr; premium</span></div>
       <div className="prow"><span className="cn">Manufacturers</span><span className="cd">Full digital presence and lead infrastructure &mdash; certifications front and center.</span><span className="tag">B2B</span></div>
+      <div className="prow"><span className="cn">Health Studios &amp; Coaches</span><span className="cd">Studios, coaches, and wellness brands given a professional, bookable presence that fills the calendar.</span><span className="tag">Wellness</span></div>
     </div>
   </div>
 </section>
