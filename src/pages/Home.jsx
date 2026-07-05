@@ -33,7 +33,7 @@ const Home = () => {
             {/* Authority badge -- social proof above the fold (#4) + telling who it's for (#9) */}
             <div className="hero-authority-badge reveal-anim visible" style={{ animationDelay: "0.05s" }}>
               <span className="auth-dot" />
-              Built by an operator &mdash; 16 years running a real business
+              Built by an operator, not an agency
             </div>
 
             <h1 className="hero-title reveal-anim visible" style={{ animationDelay: "0.1s" }}>
