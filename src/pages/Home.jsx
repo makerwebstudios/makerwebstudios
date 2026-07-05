@@ -32,11 +32,11 @@ const CSS = `
   .nav-links a:hover{color:var(--ink);}
   .mwbtn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:11px 20px;border-radius:8px;transition:.18s;cursor:pointer;border:1px solid transparent;}
   .mwbtn-primary{background:var(--clay);color:#fff;}
-  .mwbtn-primary:hover{background:var(--clay-d);}
+  .mwbtn-primary:hover{background:var(--clay-d);color:#fff;}
   .mwbtn-ghost{border-color:var(--line);color:var(--ink);}
-  .mwbtn-ghost:hover{border-color:var(--ink);}
+  .mwbtn-ghost:hover{border-color:var(--ink);color:var(--ink);}
   .mwbtn-navy{background:var(--ink);color:var(--oat);}
-  .mwbtn-navy:hover{background:#22314f;}
+  .mwbtn-navy:hover{background:#22314f;color:var(--oat);}
   .nav-ctas{display:flex;align-items:center;gap:10px;}
   @media(max-width:760px){.nav-links{display:none;}}
   /* mobile menu */
