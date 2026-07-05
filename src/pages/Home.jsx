@@ -149,7 +149,7 @@ const CSS = `
 
   /* CTA */
   .cta{background:var(--ink);color:var(--oat);text-align:center;}
-  .cta h2{font-size:clamp(34px,5.4vw,68px);max-width:16ch;margin:20px auto 0;}
+  .cta h2{color:#fff;font-size:clamp(34px,5.4vw,68px);max-width:16ch;margin:20px auto 0;}
   .cta .sub{color:#94A3B8;font-size:17px;margin:22px auto 0;max-width:52ch;}
   .cta .row{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap;}
   .cta .mwbtn-primary{background:var(--clay);color:#fff;padding:16px 30px;font-size:16px;}
