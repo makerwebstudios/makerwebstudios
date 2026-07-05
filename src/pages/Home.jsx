@@ -1,820 +1,333 @@
-// Inline SVG icons (replaces lucide-react to reduce bundle size)
-const CheckCircle2 = ({ size = 24, className = "", color, style = {} }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color || "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style}><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-);
-const TrendingDown = ({ size = 24, className = "" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
-);
-const VolumeX = ({ size = 24, className = "" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
-);
-const Factory = ({ size = 24, className = "" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>
-);
-const ArrowRight = ({ size = 24, className = "" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-);
+import { useEffect } from "react";
 
-// Stripe checkout + booking links
-const STRIPE_FOUNDATION = "https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04";
-const STRIPE_CAREPLAN = "https://buy.stripe.com/5kQfZjcjv4Ao9K4aKpejK05";
-const CALENDLY = "https://calendly.com/hello-makerwebstudios/30min";
+// Fresh homepage — "Operator's Studio" layout in MWS brand (navy + industrial orange).
+// Self-contained: the <style> below only applies while the homepage is mounted.
+
+const CSS = `
+  :root{
+    --oat:#F6F7F9; --oat-2:#EDF0F3; --paper:#F1F3F5;
+    --ink:#0F172A; --ink-soft:#475569; --muted:#64748B;
+    --clay:#FF6B00; --clay-d:#E65A00; --pine:#0F172A; --pine-2:#020617;
+    --line:rgba(15,23,42,.13); --line-soft:rgba(15,23,42,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{background:var(--oat);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .disp{font-family:'Archivo','Inter',sans-serif;font-weight:800;letter-spacing:-.02em;line-height:.98;}
+  .mono{font-family:'JetBrains Mono',monospace;font-weight:500;text-transform:uppercase;letter-spacing:.12em;}
+  a{color:inherit;text-decoration:none;}
+  .accent{color:var(--clay);}
+
+  /* eyebrow label */
+  .ey{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);display:flex;align-items:center;gap:12px;}
+  .ey::before{content:"";width:26px;height:1px;background:var(--clay);}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--oat) 88%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft);}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .brand{font-family:'Archivo',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;}
+  .brand .logo{height:32px;width:32px;border-radius:6px;display:block;flex-shrink:0;}
+  .nav-links{display:flex;gap:30px;font-size:14px;font-weight:500;color:var(--ink-soft);}
+  .nav-links a:hover{color:var(--ink);}
+  .mwbtn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:11px 20px;border-radius:8px;transition:.18s;cursor:pointer;border:1px solid transparent;}
+  .mwbtn-primary{background:var(--clay);color:#fff;}
+  .mwbtn-primary:hover{background:var(--clay-d);}
+  .mwbtn-ghost{border-color:var(--line);color:var(--ink);}
+  .mwbtn-ghost:hover{border-color:var(--ink);}
+  @media(max-width:760px){.nav-links{display:none;}}
+
+  /* hero */
+  .hero{padding:78px 0 64px;position:relative;}
+  .hero-grid{display:grid;grid-template-columns:1.3fr .95fr;gap:56px;align-items:center;}
+  .hero h1{font-size:clamp(44px,6.4vw,84px);margin:20px 0 0;}
+  .hero h1 .l2{color:var(--clay);}
+  .hero .sub{font-size:clamp(17px,1.6vw,20px);color:var(--ink-soft);max-width:30ch;margin:26px 0 0;line-height:1.55;}
+  .hero-cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;}
+  .hero-cta .mwbtn{padding:14px 24px;font-size:15px;}
+  .cred{margin-top:26px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;}
+  .cred .dot{width:6px;height:6px;border-radius:50%;background:var(--pine);}
+  /* spec card */
+  .spec{background:var(--pine);color:var(--oat);border-radius:16px;padding:30px 30px 26px;box-shadow:0 24px 60px -20px rgba(2,6,23,.55);}
+  .spec .sh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:14px;margin-bottom:16px;}
+  .spec .sh .t{font-family:'Archivo',sans-serif;font-weight:800;font-size:19px;}
+  .spec .sh .p{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;color:#FF8C33;}
+  .spec ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .spec li{display:flex;gap:11px;font-size:14px;color:#CBD5E1;line-height:1.4;}
+  .spec li b{color:#fff;font-weight:600;}
+  .spec .tick{color:var(--clay);flex-shrink:0;font-weight:700;}
+  .spec .price{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.14);display:flex;align-items:baseline;justify-content:space-between;}
+  .spec .price .big{font-family:'Archivo',sans-serif;font-weight:800;font-size:30px;color:#fff;}
+  .spec .price .mo{font-size:13px;color:#FF8C33;}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:40px;}.spec{max-width:440px;}}
+
+  /* section base */
+  section{padding:92px 0;}
+  .sec-head{max-width:760px;}
+  .sec-head h2{font-size:clamp(30px,4vw,50px);margin:18px 0 0;}
+  .lead{font-size:19px;color:var(--ink-soft);line-height:1.6;margin-top:18px;max-width:60ch;}
+
+  /* problem &mdash; two col */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:44px;align-items:start;}
+  .two .big{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,34px);line-height:1.15;letter-spacing:-.01em;}
+  .two .body{color:var(--ink-soft);font-size:16px;line-height:1.7;}
+  .two .body p{margin-bottom:14px;}
+  @media(max-width:760px){.two{grid-template-columns:1fr;gap:24px;}}
+
+  /* foundation list */
+  .build{background:var(--pine);color:var(--oat);}
+  .build .ey{color:#FF8C33;}.build .ey::before{background:#FF8C33;}
+  .build h2{color:#fff;}
+  .build .lead{color:#94A3B8;}
+  .flist{display:grid;grid-template-columns:1fr 1fr;gap:0 56px;margin-top:44px;}
+  .fitem{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:20px 0;border-top:1px solid rgba(255,255,255,.13);align-items:baseline;}
+  .fitem .n{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--clay);letter-spacing:.05em;}
+  .fitem .t{font-family:'Archivo',sans-serif;font-weight:700;font-size:17px;color:#fff;}
+  .fitem .d{font-size:13.5px;color:#94A3B8;margin-top:3px;line-height:1.45;}
+  @media(max-width:760px){.flist{grid-template-columns:1fr;}}
+
+  /* doorways */
+  .doors{display:flex;flex-direction:column;margin-top:40px;border-top:1px solid var(--line);}
+  .door{display:grid;grid-template-columns:.5fr 1fr;gap:32px;padding:28px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:.2s;}
+  .door:hover{padding-left:10px;}
+  .door .k{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(20px,2vw,26px);}
+  .door .k .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--clay);display:block;margin-bottom:6px;letter-spacing:.1em;}
+  .door .v{font-size:16px;color:var(--ink-soft);line-height:1.6;}
+  @media(max-width:640px){.door{grid-template-columns:1fr;gap:8px;}}
+
+  /* pricing */
+  .price-sec{background:var(--paper);}
+  .pgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:44px;}
+  .pcard{border:1px solid var(--line);border-radius:14px;padding:28px 26px;background:var(--oat);display:flex;flex-direction:column;}
+  .pcard.feat{background:var(--ink);color:var(--oat);border-color:var(--ink);}
+  .pcard .name{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);}
+  .pcard.feat .name{color:#FF8C33;}
+  .pcard .amt{font-family:'Archivo',sans-serif;font-weight:800;font-size:38px;margin:12px 0 2px;}
+  .pcard .per{font-size:13px;color:var(--muted);}
+  .pcard.feat .per{color:#94A3B8;}
+  .pcard .desc{font-size:14px;color:var(--ink-soft);line-height:1.6;margin:16px 0 22px;flex:1;}
+  .pcard.feat .desc{color:#94A3B8;}
+  .pcard .mwbtn{width:100%;justify-content:center;}
+  .pcard.feat .mwbtn-primary{background:var(--clay);color:#fff;}
+  @media(max-width:820px){.pgrid{grid-template-columns:1fr;}}
+
+  /* proof */
+  .proof-list{margin-top:40px;border-top:1px solid var(--line);}
+  .prow{display:grid;grid-template-columns:1.2fr 1fr auto;gap:24px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline;}
+  .prow .cn{font-family:'Archivo',sans-serif;font-weight:700;font-size:19px;}
+  .prow .cd{font-size:14px;color:var(--ink-soft);}
+  .prow .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--pine);border:1px solid var(--line);border-radius:100px;padding:5px 12px;white-space:nowrap;}
+  @media(max-width:640px){.prow{grid-template-columns:1fr;gap:6px;}.prow .tag{justify-self:start;}}
+
+  /* operator */
+  .op{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center;}
+  .op .card{background:var(--oat-2);border:1px solid var(--line);border-radius:16px;padding:30px;}
+  .op .card .q{font-family:'Archivo',sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;}
+  .op .card .attr{margin-top:18px;font-size:13px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;}
+  .op .stats{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:26px;}
+  .op .stat .num{font-family:'Archivo',sans-serif;font-weight:800;font-size:34px;color:var(--clay);}
+  .op .stat .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace;margin-top:4px;}
+  @media(max-width:760px){.op{grid-template-columns:1fr;gap:34px;}}
+
+  /* CTA */
+  .cta{background:var(--ink);color:var(--oat);text-align:center;}
+  .cta h2{font-size:clamp(34px,5.4vw,68px);max-width:16ch;margin:20px auto 0;}
+  .cta .sub{color:#94A3B8;font-size:17px;margin:22px auto 0;max-width:52ch;}
+  .cta .row{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap;}
+  .cta .mwbtn-primary{background:var(--clay);color:#fff;padding:16px 30px;font-size:16px;}
+  .cta .mwbtn-ghost{border-color:rgba(255,255,255,.3);color:var(--oat);padding:16px 30px;font-size:16px;}
+  .cta .ey{justify-content:center;color:#FF8C33;}.cta .ey::before{background:#FF8C33;}
+  .cta .fine{margin-top:22px;font-size:13px;color:var(--muted);}
+
+  footer{padding:44px 0;border-top:1px solid var(--line-soft);}
+  .foot{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);flex-wrap:wrap;gap:12px;}
+  .preview-flag{position:fixed;bottom:16px;left:16px;z-index:99;background:var(--clay);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:100px;box-shadow:0 8px 24px rgba(198,71,42,.4);}
+`;
 
 const Home = () => {
+  useEffect(() => {
+    // smooth-scroll anchor links within the page
+    const onClick = (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const el = document.querySelector(a.getAttribute("href"));
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: "smooth" }); }
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
   return (
-    <div id="home" className="fade-in">
-
-      {/* ============================================================ */}
-      {/* SECTION 1 -- HERO */}
-      {/* ============================================================ */}
-      <section className="blueprint-bg hero-premium">
-        <div className="container relative z-10">
-          <div className="hero-content text-center">
-            {/* Authority badge -- social proof above the fold (#4) + telling who it's for (#9) */}
-            <div className="hero-authority-badge reveal-anim visible" style={{ animationDelay: "0.05s" }}>
-              <span className="auth-dot" />
-              Built by an operator, not an agency
-            </div>
-
-            <h1 className="hero-title reveal-anim visible" style={{ animationDelay: "0.1s" }}>
-              Your entire online presence.<br />
-              <span className="text-accent">Consolidated. Cohesive. Proven.</span>
-            </h1>
-            <p className="hero-subtitle reveal-anim visible" style={{ animationDelay: "0.15s", fontSize: "1.5rem", color: "var(--industrial-orange)", fontWeight: "700", fontFamily: "'Outfit', sans-serif", marginBottom: "1.5rem", maxWidth: "750px", marginLeft: "auto", marginRight: "auto" }}>
-              One system for your brand, your website, and your Google presence.
-            </p>
-            <p className="hero-subtext reveal-anim visible" style={{ animationDelay: "0.2s" }}>
-              For business owners whose online presence doesn&rsquo;t match the quality of their work. <strong>Foundation</strong> consolidates your branding, your website, and your entire Google presence into one clear, high-performing system &mdash; built from your <em>why</em>, out. New brand, tired brand, or thriving brand: we meet you where you are.
-            </p>
-            <div className="hero-actions reveal-anim visible" style={{ animationDelay: "0.3s", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", maxWidth: "440px", margin: "0 auto", width: "100%" }}>
-              <a
-                href={STRIPE_FOUNDATION}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary btn-lg-premium"
-                style={{ width: "100%", textAlign: "center" }}
-              >
-                Start Your Foundation &mdash; $2,500 &rarr;
-              </a>
-              <a
-                href={CALENDLY}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-dark btn-lg-premium"
-                style={{ width: "100%", textAlign: "center" }}
-              >
-                Book a Free Audit
-              </a>
-
-              {/* Reassurance under primary CTA (#50) + expectation setting (#59) */}
-              <p className="hero-reassurance">
-                No pitch. No commitment. Just an honest 15-minute audit showing exactly where your online presence is leaking &mdash; delivered within 48 hours.
-              </p>
-            </div>
-
-            {/* Gradual engagement (#22) -- micro-commitment for visitors not ready to book */}
-            <p className="hero-microcommit reveal-anim visible" style={{ animationDelay: "0.35s" }}>
-              Not ready to talk yet? <a href="#system">See what&rsquo;s inside Foundation first &rarr;</a>
-            </p>
-
-            <div className="hero-badges reveal-anim visible" style={{ animationDelay: "0.4s", marginTop: "4rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem 2rem", justifyItems: "center", textAlign: "center", width: "100%", maxWidth: "500px", marginLeft: "auto", marginRight: "auto" }}>
-              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>Any Industry</div>
-              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>Bilingual EN &amp; ES</div>
-              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>16 Years Operating</div>
-              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "600" }}>90-Day Guarantee</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="hero-glow" />
-      </section>
-
-      <style>{`
-        .hero-premium {
-          position: relative;
-          min-height: 85vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding-top: 8rem;
-          padding-bottom: 3rem;
-          overflow: hidden;
-        }
-
-        .hero-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-
-        .relative { position: relative; }
-        .z-10 { z-index: 10; }
-
-        .badge-premium {
-          display: inline-block;
-          padding: 0.5rem 1.25rem;
-          background: rgba(255, 107, 0, 0.1);
-          border: 1px solid rgba(255, 107, 0, 0.2);
-          border-radius: 100px;
-          color: var(--industrial-orange);
-          font-size: 0.8125rem;
-          font-weight: 700;
-          margin-bottom: 2.5rem;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-        }
-
-        .hero-authority-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.6rem;
-          padding: 0.55rem 1.25rem;
-          background: rgba(255, 107, 0, 0.08);
-          border: 1px solid rgba(255, 107, 0, 0.2);
-          border-radius: 100px;
-          color: var(--industrial-orange);
-          font-size: 0.78rem;
-          font-weight: 600;
-          font-family: 'Outfit', sans-serif;
-          margin-bottom: 1.75rem;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-        }
-
-        .hero-authority-badge .auth-dot {
-          width: 8px;
-          height: 8px;
-          background: var(--industrial-orange);
-          border-radius: 50%;
-          flex-shrink: 0;
-          box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.15);
-        }
-
-        .hero-reassurance {
-          font-size: 0.85rem;
-          color: var(--text-muted);
-          line-height: 1.55;
-          text-align: center;
-          margin: 0.75rem 0 0;
-          opacity: 0.85;
-          max-width: 440px;
-        }
-
-        .hero-microcommit {
-          font-size: 0.95rem;
-          color: var(--text-muted);
-          margin-top: 1.5rem;
-          opacity: 0.8;
-        }
-
-        .hero-microcommit a {
-          color: var(--industrial-orange);
-          font-weight: 600;
-          text-decoration: none;
-          border-bottom: 1px solid rgba(255, 107, 0, 0.3);
-          padding-bottom: 1px;
-          transition: border-color 0.2s;
-        }
-
-        .hero-microcommit a:hover {
-          border-bottom-color: var(--industrial-orange);
-        }
-
-        .hero-title {
-          margin-bottom: 1rem;
-          line-height: 1.05;
-          max-width: 1000px;
-          margin-left: auto;
-          margin-right: auto;
-          color: var(--text-dark);
-        }
-
-        .hero-subtext {
-          font-size: 1.25rem;
-          color: var(--text-muted);
-          margin: 0 auto 3.5rem;
-          line-height: 1.7;
-          max-width: 750px;
-          font-weight: 500;
-        }
-
-        .btn-lg-premium {
-          padding: 1.25rem 2.5rem;
-          font-size: 1.125rem;
-        }
-
-        .hero-glow {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 80vw;
-          height: 80vw;
-          background: radial-gradient(circle, rgba(142, 185, 250, 0.08) 0%, transparent 70%);
-          border-radius: 50%;
-          pointer-events: none;
-          z-index: 1;
-        }
-
-        .system-cards-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1.5rem;
-        }
-
-        .value-line-items {
-          display: flex;
-          flex-direction: column;
-          gap: 0;
-        }
-
-        .value-line-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1rem 0;
-          border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .value-line-item:last-child {
-          border-bottom: none;
-        }
-
-        @media (max-width: 900px) {
-          .system-cards-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-
-        @media (max-width: 600px) {
-          .system-cards-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 2 -- PHILOSOPHY DIVIDER */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--bg-color)", textAlign: "center" }}>
-        <div className="container" style={{ maxWidth: "900px" }}>
-          <p style={{
-            fontSize: "clamp(2rem, 4vw, 3.5rem)",
-            fontWeight: "900",
-            fontFamily: "'Outfit', sans-serif",
-            color: "var(--text-dark)",
-            lineHeight: "1.15",
-            letterSpacing: "-0.02em",
-            margin: 0,
-          }}>
-            &ldquo;Your online presence should work as hard as you do.&rdquo;
-          </p>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 3 -- THE PROBLEM */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--dark-bg)" }} className="dark-section blueprint-bg">
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div style={{ marginBottom: "4rem" }}>
-            <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              The Reality
-            </div>
-            <h2 className="section-title" style={{ color: "white", marginBottom: "1.5rem" }}>
-              You built something real. Your online presence doesn&rsquo;t show it.
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1.125rem", maxWidth: "800px", lineHeight: "1.75" }}>
-              Most businesses have a presence that grew by accident &mdash; a website built once and never touched, a Google profile half-filled, an Instagram that says one thing and a site that says another. No cohesion. No lead capture. No clear reason for a customer to choose you. Meanwhile competitors &mdash; even the ones with half your quality &mdash; show up first on Google, look polished, and win the click while you wait for the phone to ring. That&rsquo;s not a product problem. That&rsquo;s a presence problem. And it&rsquo;s fixable.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 3.5 -- FOUNDER STORY (Storytelling #64, Authenticity #65, Repetition #5) */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--bg-color)" }} className="blueprint-bg">
-        <div className="container" style={{ maxWidth: "850px" }}>
-          <div style={{ marginBottom: "2.5rem" }}>
-            <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              How We Got Here
-            </div>
-            <h2 className="section-title" style={{ marginBottom: "2rem", fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: "1.1" }}>
-              I built a $1.5M operation from $350K.
-            </h2>
-          </div>
-
-          <div style={{ fontSize: "1.125rem", lineHeight: "1.85", color: "var(--text-muted)" }}>
-            <p style={{ marginBottom: "1.5rem" }}>
-              Before Maker Web Studios, I ran a regulated manufacturing operation with complete GMP and ISO frameworks built from the ground up in Texas. 17 employees. 70+ documented procedures. Six simultaneous certifications. We grew from $350,000 to $1.5 million in revenue across four years.
-            </p>
-            <p style={{ marginBottom: "1.5rem" }}>
-              When I looked at how business owners were finding customers in 2026, I saw the same gap everywhere: serious operations with broken, scattered digital presences. Great companies invisible online. Owners with real reputations whose websites and profiles made them look small &mdash; customers Googling them and bouncing off a slow, dated, or inconsistent presence with no way to convert.
-            </p>
-            <p style={{ marginBottom: "1.5rem" }}>
-              That&rsquo;s the gap Maker Web Studios fixes &mdash; and it&rsquo;s why I built it the way I did. Not as a generic agency. As the operator&rsquo;s eye I wish every business had pointed at its brand, its website, and its Google presence.
-            </p>
-            <p style={{ marginBottom: "0", fontStyle: "italic", color: "var(--text-dark)", fontWeight: "600" }}>
-              I&rsquo;m not a designer who read about business. I&rsquo;m an operator who learned to build brands and websites. The difference shows up in every conversation.
-            </p>
-          </div>
-
-          <div style={{ marginTop: "2.5rem", padding: "1.5rem", background: "rgba(255, 107, 0, 0.05)", border: "1px solid rgba(255, 107, 0, 0.15)", borderRadius: "var(--border-radius)" }}>
-            <p style={{ margin: 0, fontSize: "0.95rem", color: "var(--text-dark)", fontWeight: "600" }}>
-              &mdash; Guillermo Aristi, Founder
-              <span style={{ color: "var(--text-muted)", fontWeight: "500", marginLeft: "0.5rem" }}>
-                | 16 years operating | Design &middot; Web &middot; Manufacturing
-              </span>
-            </p>
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 4 -- THE SYSTEM (FOUNDATION) */}
-      {/* ============================================================ */}
-      <section id="system" style={{ padding: "8rem 0", background: "var(--bg-color)" }} className="blueprint-bg">
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div style={{ marginBottom: "4rem" }}>
-            <div className="badge-premium" style={{ color: "var(--industrial-orange)", background: "transparent", border: "none", padding: 0, marginBottom: "1rem" }}>
-              The Foundation Build
-            </div>
-            <h2 className="section-title" style={{ marginBottom: "1rem" }}>
-              One build. Your brand, your website, and your Google presence &mdash; consolidated.
-            </h2>
-            <p className="section-subtitle" style={{ maxWidth: "820px" }}>
-              Foundation isn&rsquo;t a website package. It&rsquo;s your entire online presence installed as one coherent system &mdash; built from your <em>why</em>, then made visible, cohesive, and measurable wherever customers find you.
-            </p>
-          </div>
-
-          <div className="system-cards-grid">
-            {[
-              {
-                num: "01",
-                title: "Your Why & Positioning",
-                desc: "Who you're for and the one message that makes it obvious.",
-              },
-              {
-                num: "02",
-                title: "Cohesive Brand & Identity",
-                desc: "A consistent look, voice, and message across every channel.",
-              },
-              {
-                num: "03",
-                title: "Modern, Fast Website",
-                desc: "Responsive, clear, bilingual-ready — built to get found.",
-              },
-              {
-                num: "04",
-                title: "On-Page & Technical SEO",
-                desc: "Schema, sitemap, and structure so search can read you.",
-              },
-              {
-                num: "05",
-                title: "Google Business Profile",
-                desc: "Claimed and fully optimized — photos, posts, reviews, Q&A.",
-              },
-              {
-                num: "06",
-                title: "Analytics & Tag Manager",
-                desc: "GA4 + GTM wired so every visit and action is tracked.",
-              },
-              {
-                num: "07",
-                title: "Search Console + UTM",
-                desc: "Verified, submitted, and attributable across channels.",
-              },
-              {
-                num: "08",
-                title: "30-Day Performance Report",
-                desc: "Before-and-after proof that the system is working.",
-              },
-            ].map((item, idx) => (
-              <div key={idx} className="bento-card reveal-anim visible" style={{ animationDelay: `${0.05 * idx}s`, position: "relative" }}>
-                <div style={{ fontSize: "3rem", fontWeight: "900", color: "var(--industrial-orange)", opacity: 0.15, position: "absolute", top: "1.25rem", right: "1.5rem", lineHeight: 1, fontFamily: "'Outfit', sans-serif" }}>{item.num}</div>
-                <h3 className="card-title" style={{ fontSize: "1.25rem", fontWeight: "800", fontFamily: "'Outfit', sans-serif", marginBottom: "0.75rem" }}>{item.title}</h3>
-                <p className="card-text" style={{ fontSize: "0.95rem" }}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 4A -- THREE DOORWAYS */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--dark-bg)" }} className="dark-section blueprint-bg">
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
-            <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              Wherever your brand is today
-            </div>
-            <h2 className="section-title" style={{ color: "white", marginBottom: "1rem" }}>
-              Three ways in. One system underneath.
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.05rem", lineHeight: "1.8", maxWidth: "700px", margin: "0 auto" }}>
-              You don&rsquo;t need the jargon &mdash; just pick the one that sounds like you.
-            </p>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
-            {[
-              { title: "Brand-new brand", desc: "Launching something? We build it to look established, professional, and findable from day one — so you skip the “we look small” phase entirely." },
-              { title: "Dated or scattered", desc: "Old website, mismatched profiles, message all over the place? We consolidate it into one refreshed, cohesive presence that finally matches your work." },
-              { title: "Already winning", desc: "Doing well but leaking demand? We optimize every channel so the reputation you’ve earned actually converts — and defends your lead." },
-            ].map((d, i) => (
-              <div key={i} style={{ padding: "2rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "var(--border-radius)" }}>
-                <h3 style={{ fontSize: "1.35rem", fontWeight: "800", fontFamily: "'Outfit', sans-serif", color: "#fff", marginBottom: "0.75rem" }}>{d.title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.98rem", lineHeight: "1.65" }}>{d.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 4B -- SEO / GEO / AIO */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--dark-bg)" }} className="dark-section blueprint-bg">
-        <div className="container" style={{ maxWidth: "900px" }}>
-          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              How Customers Find You in 2026
-            </div>
-            <h2 className="section-title" style={{ color: "white", marginBottom: "1.5rem" }}>
-              SEO alone isn't enough anymore.
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.05rem", lineHeight: "1.8", maxWidth: "750px", margin: "0 auto" }}>
-              Your customers search on Google, ask ChatGPT, and check AI Overviews before they ever pick up the phone.
-              We build your presence to show up across all three.
-            </p>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            {[
-              { abbr: "SEO", color: "var(--industrial-orange)", title: "Search Engine Optimization", desc: "Google and Bing rankings. Keywords, schema, backlinks, service pages. Still 80% of search traffic." },
-              { abbr: "GEO", color: "#10b981", title: "Generative Engine Optimization", desc: "Getting cited by ChatGPT, Perplexity, and Claude when customers ask AI for recommendations in your category." },
-              { abbr: "AIO", color: "#6366f1", title: "AI Overview Optimization", desc: "Showing up in Google's AI summary box — which now appears on 88% of informational searches." },
-            ].map((item, i) => (
-              <div key={i} style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1.5rem",
-                padding: "1.5rem 2rem",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                borderLeft: `3px solid ${item.color}`,
-                borderRadius: "var(--border-radius)",
-              }}>
-                <div style={{ fontSize: "1.1rem", fontWeight: "800", color: item.color, fontFamily: "'Outfit', sans-serif", minWidth: "40px", letterSpacing: "0.05em" }}>{item.abbr}</div>
-                <div>
-                  <div style={{ color: "#fff", fontSize: "1rem", fontWeight: "700", fontFamily: "'Outfit', sans-serif", marginBottom: "0.25rem" }}>{item.title}</div>
-                  <div style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.9rem", lineHeight: "1.6" }}>{item.desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ============================================================ */}
-      {/* SECTION 4C -- SEO/GEO/AIO CLOSER */}
-      {/* ============================================================ */}
-      <section style={{ padding: "6rem 0", background: "var(--bg-color)", textAlign: "center" }}>
-        <div className="container" style={{ maxWidth: "900px" }}>
-          <h2 className="section-title" style={{ color: "var(--text-dark)", fontSize: "clamp(1.75rem, 4vw, 2.75rem)", lineHeight: "1.2", fontFamily: "'Outfit', sans-serif", fontWeight: "900", margin: "0 auto", maxWidth: "800px" }}>
-            Most agencies optimize for Google alone. We optimize for every system your customer uses to make a decision.
-          </h2>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 5 -- VALUE STACK / PRICING */}
-      {/* ============================================================ */}
-      <section id="pricing" style={{ padding: "8rem 0", background: "var(--dark-bg)" }} className="dark-section blueprint-bg">
-        <div className="container" style={{ maxWidth: "900px" }}>
-          <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-            <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              What It's Worth
-            </div>
-            <h2 className="section-title" style={{ color: "white", marginBottom: "1rem" }}>
-              Everything inside Foundation
-            </h2>
-          </div>
-
-          <div className="value-line-items" style={{ marginBottom: "3rem" }}>
-            {[
-              { label: "Brand, Message & Identity Direction", value: "$3,000" },
-              { label: "Modern, Responsive Website Build", value: "$4,500" },
-              { label: "On-Page & Technical SEO", value: "$1,500" },
-              { label: "Google Business Profile Optimization", value: "$1,500" },
-              { label: "GA4 + Tag Manager + Search Console Setup", value: "$1,200" },
-              { label: "Citation / NAP Audit & Cleanup", value: "$800" },
-              { label: "Bilingual (EN/ES) Layer", value: "$1,500" },
-              { label: "30-Day Performance Report", value: "$500" },
-            ].map((item, idx) => (
-              <div key={idx} className="value-line-item">
-                <span style={{ color: "rgba(255,255,255,0.75)", fontSize: "1.05rem", fontWeight: "500" }}>{item.label}</span>
-                <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "1.05rem", fontWeight: "700", fontFamily: "'Outfit', sans-serif" }}>{item.value}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Total */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.5rem 0", borderTop: "2px solid var(--industrial-orange)", marginBottom: "3rem" }}>
-            <span style={{ color: "white", fontSize: "1.25rem", fontWeight: "700" }}>Total Value</span>
-            <span style={{ color: "var(--industrial-orange)", fontSize: "2rem", fontWeight: "900", fontFamily: "'Outfit', sans-serif" }}>$14,500</span>
-          </div>
-
-          {/* Investment */}
-          <div style={{ textAlign: "center", padding: "3rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "var(--border-radius)", marginBottom: "2rem" }}>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "1rem", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              Your Investment
-            </p>
-            <div style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: "900", fontFamily: "'Outfit', sans-serif", color: "white", lineHeight: "1.2" }}>
-              $2,500 <span style={{ color: "rgba(255,255,255,0.4)", fontWeight: "500", fontSize: "1.25rem" }}>to build it</span> + $500/mo <span style={{ color: "rgba(255,255,255,0.4)", fontWeight: "500", fontSize: "1.25rem" }}>to keep it working</span>
-            </div>
-            <p style={{ color: "var(--industrial-orange)", fontSize: "0.95rem", fontWeight: "600", marginTop: "1.5rem", marginBottom: "0" }}>
-              The Care Plan keeps your presence secure, current, and visible every month &mdash; and protects your Foundation.
-            </p>
-          </div>
-
-          {/* CTAs -- both Stripe links wired here */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", maxWidth: "440px", margin: "0 auto", width: "100%" }}>
-            <a href={STRIPE_FOUNDATION} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: "1.25rem 2.5rem", fontSize: "1.0625rem", width: "100%", textAlign: "center", fontWeight: "800" }}>
-              Start Your Foundation &mdash; $2,500 &rarr;
-            </a>
-            <a href={STRIPE_CAREPLAN} target="_blank" rel="noopener noreferrer" className="btn" style={{ padding: "1rem 2.5rem", fontSize: "0.95rem", background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.25)", width: "100%", textAlign: "center", fontWeight: "600" }}>
-              Add the Care Plan &mdash; $500/mo
-            </a>
-            <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="btn" style={{ padding: "0.85rem 2.5rem", fontSize: "0.9rem", background: "transparent", color: "rgba(255,255,255,0.7)", border: "none", width: "100%", textAlign: "center", fontWeight: "600", textDecoration: "underline" }}>
-              Prefer to talk first? Book a free audit &rarr;
-            </a>
-
-            <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", lineHeight: "1.55", textAlign: "center", margin: "0.75rem 0 0", maxWidth: "440px" }}>
-              Ready to grow harder? <strong style={{ color: "rgba(255,255,255,0.75)" }}>GrowthEngine</strong> ($1,200&ndash;$1,800/mo) adds full SEO, content, backlinks, and lead generation on top of your Foundation.
-            </p>
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 6 -- GUARANTEE */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--bg-color)" }} className="blueprint-bg">
-        <div className="container" style={{ maxWidth: "900px" }}>
-          <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-            <div className="badge-premium" style={{ color: "var(--industrial-orange)", background: "transparent", border: "none", padding: 0, marginBottom: "1rem" }}>
-              Our Guarantee
-            </div>
-            <h2 className="section-title" style={{ marginBottom: "1rem" }}>
-              We guarantee results. Not just deliverables.
-            </h2>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "2rem", marginBottom: "3rem" }}>
-            {/* 30-Day Unconditional */}
-            <div className="bento-card reveal-anim visible" style={{ borderLeft: "4px solid var(--industrial-orange)" }}>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", marginBottom: "1rem", color: "var(--industrial-orange)", opacity: 0.35, fontFamily: "'Outfit', sans-serif", lineHeight: 1 }}>
-                <span style={{ fontSize: "2.5rem", fontWeight: "900" }}>30</span>
-                <span style={{ fontSize: "1rem", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase" }}>Day</span>
-              </div>
-              <h3 style={{ fontSize: "1.25rem", color: "var(--text-dark)", marginBottom: "1rem", fontWeight: "700" }}>Unconditional Redesign Guarantee</h3>
-              <p style={{ color: "var(--text-muted)", lineHeight: "1.7", fontSize: "0.95rem" }}>
-                If you're not completely satisfied with the website within 30 days of launch, we redesign it for free. No questions asked. No fine print.
-              </p>
-            </div>
-
-            {/* 90-Day Impressions Guarantee */}
-            <div className="bento-card reveal-anim visible" style={{ border: "2px solid var(--industrial-orange)" }}>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", marginBottom: "1rem", color: "var(--industrial-orange)", opacity: 0.35, fontFamily: "'Outfit', sans-serif", lineHeight: 1 }}>
-                <span style={{ fontSize: "2.5rem", fontWeight: "900" }}>90</span>
-                <span style={{ fontSize: "1rem", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase" }}>Day</span>
-              </div>
-              <h3 style={{ fontSize: "1.25rem", color: "var(--text-dark)", marginBottom: "1rem", fontWeight: "700" }}>Confidence Guarantee</h3>
-              <p style={{ color: "var(--text-muted)", lineHeight: "1.7", fontSize: "0.95rem" }}>
-                If your Google Search Console impressions don&rsquo;t increase by at least 50% within 90 days of launch, we keep working at no charge until they do.
-              </p>
-            </div>
-          </div>
-
-          <p style={{
-            textAlign: "center",
-            fontSize: "clamp(2rem, 4vw, 3.5rem)",
-            fontWeight: "900",
-            fontFamily: "'Outfit', sans-serif",
-            color: "var(--text-dark)",
-            lineHeight: "1.15",
-            letterSpacing: "-0.02em",
-            margin: "3rem 0 0",
-          }}>
-            We only win when you win.
-          </p>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 6B -- HOW WE WORK */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--dark-bg)" }} className="dark-section blueprint-bg">
-        <div className="container" style={{ maxWidth: "1100px" }}>
-          <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-            <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              How We Work
-            </div>
-            <h2 className="section-title" style={{ color: "white", marginBottom: "1rem" }}>
-              A process this thorough is rare. That's the point.
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.05rem", lineHeight: "1.8", maxWidth: "750px", margin: "0 auto" }}>
-              Most agencies hand you a website and disappear. We run a 16-phase delivery system &mdash; the same rigor Fortune 500 companies pay consultants to design, built for any business serious about being found.
-            </p>
-          </div>
-
-          {/* Stats row */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem", marginBottom: "3rem" }}>
-            {[
-              { num: "250+", label: "Checkpoints cleared before we call it done" },
-              { num: "16", label: "Phases from discovery to ongoing retainer" },
-              { num: "90-Day", label: "Results guarantee — or we keep working" },
-            ].map((s, i) => (
-              <div key={i} style={{ padding: "1.5rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "var(--border-radius)", textAlign: "center" }}>
-                <div style={{ fontSize: "2rem", fontWeight: "900", color: "var(--industrial-orange)", fontFamily: "'Outfit', sans-serif", lineHeight: "1", marginBottom: "0.5rem" }}>{s.num}</div>
-                <div style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.5)", fontWeight: "500", lineHeight: "1.4" }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Phase cards grid */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1rem", marginBottom: "3rem" }}>
-            {[
-              { num: "Phase 0", name: "Discovery & Onboarding", detail: "18 checkpoints" },
-              { num: "Phase 1", name: "Audit Suite", detail: "6 audits delivered to client" },
-              { num: "Phase 2", name: "Infrastructure", detail: "Domain, Cloudflare, SSL, Git" },
-              { num: "Phase 3", name: "Design & Build", detail: "Mobile, cross-browser, client-approved" },
-              { num: "Phase 4", name: "Analytics & Tracking", detail: "GA4, GSC, GTM, conversions" },
-              { num: "Phase 5", name: "SEO Foundation", detail: "Schema, sitemap, keywords mapped" },
-              { num: "Phase 6", name: "Service + City Pages", detail: "Local landing pages per market" },
-              { num: "Phase 7", name: "Google Business Profile", detail: "Fully optimized, review system live" },
-              { num: "Phase 8", name: "Directory Citations", detail: "12+ directories, NAP verified" },
-              { num: "Phase 9", name: "PageSpeed & Technical", detail: "85+ score, Core Web Vitals green" },
-              { num: "Phases 10-12", name: "Content & Growth", detail: "90 days of SEO content, GBP posts, backlinks" },
-              { num: "Phases 13-16", name: "Reporting & Retainer", detail: "Monthly reports, ongoing optimization" },
-            ].map((p, i) => (
-              <div key={i} style={{
-                padding: "1.25rem 1.5rem",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: "var(--border-radius)",
-                transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,107,0,0.3)"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(255,107,0,0.08)"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
-              >
-                <div style={{ fontSize: "0.7rem", fontWeight: "700", color: "var(--industrial-orange)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.4rem" }}>{p.num}</div>
-                <div style={{ fontSize: "0.95rem", fontWeight: "700", color: "#fff", fontFamily: "'Outfit', sans-serif", marginBottom: "0.35rem", lineHeight: "1.3" }}>{p.name}</div>
-                <div style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.45)", lineHeight: "1.4" }}>{p.detail}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Footnote */}
-          <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.35)", textAlign: "center", margin: 0 }}>
-            Every project includes a QA gate at the end of each phase. Work doesn&rsquo;t advance until it passes.
-          </p>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 6C -- PORTFOLIO TEASER */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--bg-color)", textAlign: "center" }} className="blueprint-bg">
-        <div className="container" style={{ maxWidth: "750px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-            Portfolio
-          </div>
-          <h2 className="section-title" style={{ marginBottom: "1.5rem" }}>
-            Built for great businesses.<br />
-            <span className="text-accent">By an operator.</span>
-          </h2>
-          <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1.25rem", lineHeight: "1.75", maxWidth: "700px", marginBottom: "2.5rem" }}>
-            Restaurants, trades, manufacturers, studios, clubs &mdash; every project started the same way: a great business with an online presence that undersold it.
-          </p>
-          <a
-            href="/portfolio"
-            className="btn btn-primary btn-lg-premium"
-            style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
-          >
-            See Our Work
-            <ArrowRight size={18} />
-          </a>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 7 -- ABOUT */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--dark-bg)" }} className="dark-section blueprint-bg">
-        <div className="container" style={{ maxWidth: "900px" }}>
-          <div style={{ marginBottom: "3rem" }}>
-            <div style={{ color: "var(--industrial-orange)", fontSize: "0.8125rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-              Why Maker Web Studios
-            </div>
-            <h2 className="section-title" style={{ color: "white", marginBottom: "1.5rem" }}>
-              An operator who brands &mdash; not a coder who guessed.
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1.125rem", lineHeight: "1.75", maxWidth: "800px" }}>
-              You&rsquo;ve read the story &mdash; here&rsquo;s why it matters for your project. Most agencies give creative opinions from the outside. We give them from inside the business, with 16 years of margins, SKUs, and supply chain behind them. &ldquo;Niche down&rdquo; from a designer is a slogan; from an operator who&rsquo;s run the floor, it&rsquo;s consulting. That&rsquo;s why owners who make and sell real things come to us specifically &mdash; design eye, web tech, and operator judgment, in one place.
-            </p>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2rem" }}>
-            {[
-              { num: "16", label: "Years Operating" },
-              { num: "3", label: "New Clients Per Month" },
-              { num: "90", label: "Day Confidence Guarantee" },
-              { num: "EN/ES", label: "Bilingual Builds" },
-            ].map((stat, idx) => (
-              <div key={idx} style={{ textAlign: "center" }}>
-                <div style={{ fontSize: "2.5rem", fontWeight: "900", color: "var(--industrial-orange)", fontFamily: "'Outfit', sans-serif", lineHeight: "1" }}>{stat.num}</div>
-                <div style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.05em", marginTop: "0.5rem", fontWeight: "600" }}>{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* ============================================================ */}
-      {/* SECTION 8 -- SCARCITY / CTA */}
-      {/* ============================================================ */}
-      <section style={{ padding: "8rem 0", background: "var(--bg-color)", textAlign: "center" }}>
-        <div className="container" style={{ maxWidth: "750px", margin: "0 auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <div className="badge-premium" style={{ color: "var(--industrial-orange)", background: "transparent", border: "none", padding: 0, marginBottom: "1rem" }}>
-            Limited Availability
-          </div>
-          <h2 className="section-title" style={{ color: "var(--text-dark)", textAlign: "center", marginBottom: "1.5rem", fontSize: "clamp(2.25rem, 5vw, 3.5rem)", lineHeight: "1.1", fontFamily: "'Outfit', sans-serif", fontWeight: "900" }}>
-            We only take 3 new Foundation clients per month.
-          </h2>
-          <p style={{ fontSize: "1.125rem", color: "var(--text-muted)", textAlign: "center", marginBottom: "2rem", lineHeight: "1.75", fontWeight: "500", opacity: 0.9, maxWidth: "650px" }}>
-            Not as a marketing tactic &mdash; as a quality commitment. Every client gets our full attention from discovery to launch. Three slots means your project never gets deprioritized.
-          </p>
-
-          {/* Curiosity hook (#49) */}
-          <div style={{ padding: "1.25rem 1.75rem", background: "rgba(255, 107, 0, 0.06)", border: "1px solid rgba(255, 107, 0, 0.2)", borderRadius: "var(--border-radius)", marginBottom: "2.5rem", maxWidth: "650px" }}>
-            <p style={{ fontSize: "1rem", color: "var(--text-dark)", margin: 0, fontWeight: "600", lineHeight: "1.6" }}>
-              There&rsquo;s one thing missing from almost every business&rsquo;s online presence that&rsquo;s quietly costing them 30&ndash;40% of their inbound leads. We find it on the audit call. Ask about it.
-            </p>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", maxWidth: "440px", width: "100%" }}>
-            <a href={STRIPE_FOUNDATION} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: "1.25rem 3rem", fontSize: "1.125rem", fontWeight: "900", fontFamily: "'Outfit', sans-serif", borderRadius: "4px", width: "100%", textAlign: "center" }}>
-              Start Your Foundation &mdash; $2,500 &rarr;
-            </a>
-            <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="btn btn-dark" style={{ padding: "1rem 3rem", fontSize: "1rem", width: "100%", textAlign: "center", fontWeight: "700" }}>
-              Or claim my free 15-minute audit
-            </a>
-          </div>
-          <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", marginTop: "1.25rem", opacity: 0.75, maxWidth: "550px", lineHeight: "1.6" }}>
-            No cost. No sales pitch. No commitment. Just a detailed look at what your online presence is costing you &mdash; delivered within 48 hours.
-          </p>
-        </div>
-      </section>
-
-      {/* Footer Line */}
-      <div style={{ padding: "2rem 0", textAlign: "center", borderTop: "1px solid var(--border-color)", background: "var(--bg-color)" }}>
-        <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", opacity: 0.6, margin: 0 }}>
-          &copy; 2026 Maker Web Studios. Foundation and the Revenue Builder System are frameworks of Maker Web Studios.
-        </p>
+    <>
+      <style>{CSS}</style>
+      <nav>
+  <div className="wrap nav">
+    <div className="brand"><img className="logo" src="/logos/Maker Logo - 300 x 300 px - Official.png" alt="Maker Web Studios logo" />Maker Web Studios</div>
+    <div className="nav-links"><a href="#build">The Build</a><a href="#pricing">Pricing</a><a href="#work">Work</a><a href="#operator">Who</a></div>
+    <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-primary">Free Audit</a>
+  </div>
+</nav>
+
+
+<header className="hero">
+  <div className="wrap hero-grid">
+    <div>
+      <div className="ey">Maker Web Studios &middot; Est. Texas</div>
+      <h1 className="disp">Your brand should work<br /><span className="l2">as hard as you do.</span></h1>
+      <p className="sub">One system for your brand, your website, and your Google presence &mdash; installed by an operator, not an agency.</p>
+      <div className="hero-cta">
+        <a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary">Start your Foundation &mdash; $2,500 &rarr;</a>
+        <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-ghost">Book a free audit</a>
       </div>
-
+      <div className="cred"><span className="dot"></span>16 years running a real business &middot; GMP &middot; ISO 9001 &middot; SQF &middot; Bilingual EN/ES</div>
     </div>
+
+    <aside className="spec">
+      <div className="sh"><span className="t">The Foundation</span><span className="p">ONE BUILD</span></div>
+      <ul>
+        <li><span className="tick">+</span><span><b>Brand &amp; message</b> built from your <i>why</i></span></li>
+        <li><span className="tick">+</span><span><b>Modern site</b> &mdash; fast, responsive, bilingual-ready</span></li>
+        <li><span className="tick">+</span><span><b>Full Google stack</b> &mdash; Profile, GA4, GTM, Search Console</span></li>
+        <li><span className="tick">+</span><span><b>30-day report</b> &mdash; proof it's working</span></li>
+      </ul>
+      <div className="price"><span className="big">$2,500</span><span className="mo">+ $500/mo to keep it working</span></div>
+    </aside>
+  </div>
+</header>
+
+
+<section>
+  <div className="wrap">
+    <div className="ey">01 &mdash; The reality</div>
+    <div className="two">
+      <div className="big">You built something real. Your online presence doesn't show it.</div>
+      <div className="body">
+        <p>Most presences grew by accident &mdash; a website built once and never touched, a half-filled Google profile, an Instagram that says one thing and a site that says another.</p>
+        <p>No cohesion. No lead capture. No clear reason to choose you. Meanwhile competitors with half your quality show up first, look polished, and win the click.</p>
+        <p>That's not a product problem. It's a presence problem &mdash; <span className="accent">and it's fixable.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section className="build" id="build">
+  <div className="wrap">
+    <div className="ey">02 &mdash; The Foundation</div>
+    <div className="sec-head"><h2 className="disp">One build. Everything, consolidated.</h2>
+      <p className="lead">Not a website package &mdash; your whole online presence installed as one system, built from your <i>why</i>, then made visible and measurable wherever customers find you.</p>
+    </div>
+    <div className="flist">
+      <div className="fitem"><span className="n">01</span><div><div className="t">Your Why &amp; Positioning</div><div className="d">Who you're for and the one message that makes it obvious.</div></div></div>
+      <div className="fitem"><span className="n">02</span><div><div className="t">Cohesive Brand &amp; Identity</div><div className="d">One look, voice, and message across every channel.</div></div></div>
+      <div className="fitem"><span className="n">03</span><div><div className="t">Modern, Fast Website</div><div className="d">Responsive, clear, bilingual-ready &mdash; built to get found.</div></div></div>
+      <div className="fitem"><span className="n">04</span><div><div className="t">On-Page &amp; Technical SEO</div><div className="d">Schema, sitemap, structure so search can read you.</div></div></div>
+      <div className="fitem"><span className="n">05</span><div><div className="t">Google Business Profile</div><div className="d">Claimed and optimized &mdash; photos, posts, reviews, Q&amp;A.</div></div></div>
+      <div className="fitem"><span className="n">06</span><div><div className="t">Analytics &amp; Tag Manager</div><div className="d">GA4 + GTM wired so every visit and action is tracked.</div></div></div>
+      <div className="fitem"><span className="n">07</span><div><div className="t">Search Console + UTM</div><div className="d">Verified, submitted, attributable across channels.</div></div></div>
+      <div className="fitem"><span className="n">08</span><div><div className="t">30-Day Performance Report</div><div className="d">Before-and-after proof the system is working.</div></div></div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div className="wrap">
+    <div className="ey">03 &mdash; Wherever you are</div>
+    <div className="sec-head"><h2 className="disp">Three ways in. One system underneath.</h2></div>
+    <div className="doors">
+      <div className="door"><div className="k"><span className="num">New</span>Brand-new brand</div><div className="v">Launching something? We build it to look established, professional, and findable from day one &mdash; so you skip the "we look small" phase entirely.</div></div>
+      <div className="door"><div className="k"><span className="num">Refresh</span>Dated or scattered</div><div className="v">Old site, mismatched profiles, message all over? We consolidate it into one refreshed, cohesive presence that finally matches your work.</div></div>
+      <div className="door"><div className="k"><span className="num">Optimize</span>Already winning</div><div className="v">Doing well but leaking demand? We tune every channel so the reputation you've earned actually converts &mdash; and defends your lead.</div></div>
+    </div>
+  </div>
+</section>
+
+
+<section className="price-sec" id="pricing">
+  <div className="wrap">
+    <div className="ey">04 &mdash; The investment</div>
+    <div className="sec-head"><h2 className="disp">Priced to get the yes. Built to earn the stay.</h2></div>
+    <div className="pgrid">
+      <div className="pcard feat">
+        <div className="name">Foundation &middot; one-time</div>
+        <div className="amt">$2,500</div><div className="per">one build &middot; replaces ~$6,000 of separate work</div>
+        <div className="desc">Brand, website, and the full Google stack &mdash; consolidated into one system with a 30-day proof report.</div>
+        <a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary">Start Foundation &rarr;</a>
+      </div>
+      <div className="pcard">
+        <div className="name">Care Plan &middot; monthly</div>
+        <div className="amt">$500<span style={{fontSize:'16px',color:'var(--muted)'}}>/mo</span></div><div className="per">the standard attach</div>
+        <div className="desc">Hosting, security, backups, Google Business upkeep, and a monthly performance report that keeps it live and working.</div>
+        <a href="https://buy.stripe.com/5kQfZjcjv4Ao9K4aKpejK05" className="mwbtn mwbtn-ghost">Add Care Plan</a>
+      </div>
+      <div className="pcard">
+        <div className="name">GrowthEngine &middot; monthly</div>
+        <div className="amt">$1.2&ndash;1.8k<span style={{fontSize:'16px',color:'var(--muted)'}}>/mo</span></div><div className="per">grow harder</div>
+        <div className="desc">Full SEO, 2&ndash;4 posts/mo, backlinks, service + city pages, and lead-gen infrastructure on top of your Foundation.</div>
+        <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-ghost">Talk it through</a>
+      </div>
+    </div>
+    <p style={{marginTop:'24px',fontSize:'13px',color:'var(--muted)',fontFamily:"'JetBrains Mono',monospace",letterSpacing:'.04em'}}>&#8627; 90-DAY GUARANTEE &mdash; GOOGLE IMPRESSIONS UP 50%+, OR WE KEEP WORKING FREE.</p>
+  </div>
+</section>
+
+
+<section id="work">
+  <div className="wrap">
+    <div className="ey">05 &mdash; The work</div>
+    <div className="sec-head"><h2 className="disp">Restaurants, trades, manufacturers, studios.</h2>
+      <p className="lead">Every project started the same way: a great business with an online presence that undersold it.</p></div>
+    <div className="proof-list">
+      <div className="prow"><span className="cn">GW's BBQ</span><span className="cd">Rebuilt the digital front door + ordering flow; real orders week one.</span><span className="tag">Winning &middot; leak fixed</span></div>
+      <div className="prow"><span className="cn">Valley Modern Plumbing</span><span className="cd">Repositioned a commodity trade site into a premium local brand.</span><span className="tag">Dated &rarr; premium</span></div>
+      <div className="prow"><span className="cn">ABBA Manufacturing</span><span className="cd">Full digital presence + lead infrastructure for an ISO-certified maker.</span><span className="tag">Manufacturer</span></div>
+      <div className="prow"><span className="cn">RGV Tech Institute</span><span className="cd">Cohesive, professional, bilingual EN/ES site for the Valley market.</span><span className="tag">New &middot; bilingual</span></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="operator" style={{background:'var(--oat-2)'}}>
+  <div className="wrap op">
+    <div>
+      <div className="ey">06 &mdash; Who's behind it</div>
+      <h2 className="disp" style={{fontSize:'clamp(28px,3.4vw,42px)',marginTop:'18px'}}>An operator who brands &mdash; not a coder who guessed.</h2>
+      <div className="stats">
+        <div className="stat"><div className="num">16</div><div className="lbl">Years operating</div></div>
+        <div className="stat"><div className="num">$350K&rarr;$1.5M</div><div className="lbl">Built &amp; exited</div></div>
+        <div className="stat"><div className="num">90-day</div><div className="lbl">Confidence guarantee</div></div>
+        <div className="stat"><div className="num">EN/ES</div><div className="lbl">Bilingual builds</div></div>
+      </div>
+    </div>
+    <div className="card">
+      <div className="q">"I'm not a designer who read about business. I'm an operator who learned to build brands and websites &mdash; margins, SKUs, supply chain, and all. The difference shows up in every conversation."</div>
+      <div className="attr">&mdash; Guillermo Aristi, Founder &middot; GMP &middot; ISO &middot; SQF &middot; 6S</div>
+    </div>
+  </div>
+</section>
+
+
+<section className="cta">
+  <div className="wrap">
+    <div className="ey">Limited &mdash; 3 new clients / month</div>
+    <h2 className="disp">Let's build the presence your work deserves.</h2>
+    <p className="sub">Start with a free 15-minute audit &mdash; we'll show you exactly where your online presence is leaking, delivered within 48 hours.</p>
+    <div className="row">
+      <a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary">Start your Foundation &mdash; $2,500 &rarr;</a>
+      <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-ghost">Claim my free audit</a>
+    </div>
+    <p className="fine">No cost &middot; no pitch &middot; no commitment.</p>
+  </div>
+</section>
+
+<footer>
+  <div className="wrap foot">
+    <div className="brand" style={{fontSize:'16px'}}><img className="logo" src="/logos/Maker Logo - 300 x 300 px - Official.png" alt="Maker Web Studios logo" />Maker Web Studios</div>
+    <div>© 2026 &middot; Built by an operator &middot; Mission, TX</div>
+  </div>
+</footer>
+    </>
   );
 };
 
