@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Fresh homepage — "Operator's Studio" layout in MWS brand (navy + industrial orange).
 // Self-contained: the <style> below only applies while the homepage is mounted.
@@ -36,6 +36,17 @@ const CSS = `
   .mwbtn-ghost{border-color:var(--line);color:var(--ink);}
   .mwbtn-ghost:hover{border-color:var(--ink);}
   @media(max-width:760px){.nav-links{display:none;}}
+  /* mobile menu */
+  .mw-burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;}
+  .mw-burger span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s;}
+  .mw-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .mw-burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .mw-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mw-mobile{display:none;flex-direction:column;padding:0 32px;max-height:0;overflow:hidden;transition:max-height .3s ease;background:var(--oat);border-bottom:1px solid var(--line-soft);}
+  .mw-mobile a{padding:15px 0;font-size:16px;font-weight:600;color:var(--ink-soft);border-bottom:1px solid var(--line-soft);}
+  .mw-mobile a.mwbtn{margin:16px 0;border-bottom:0;justify-content:center;color:#fff;}
+  .mw-mobile.open{max-height:360px;}
+  @media(max-width:760px){.nav-cta{display:none !important;}.mw-burger{display:flex !important;}.mw-mobile{display:flex;}}
 
   /* hero */
   .hero{padding:78px 0 64px;position:relative;}
@@ -142,9 +153,12 @@ const CSS = `
   footer{padding:44px 0;border-top:1px solid var(--line-soft);}
   .foot{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);flex-wrap:wrap;gap:12px;}
   .preview-flag{position:fixed;bottom:16px;left:16px;z-index:99;background:var(--clay);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:100px;box-shadow:0 8px 24px rgba(198,71,42,.4);}
+
+  @media(max-width:600px){.wrap{padding:0 20px;}.hero h1{font-size:34px;line-height:1.02;}.hero{padding:56px 0 48px;}.sec-head h2{font-size:28px;}}
 `;
 
 const Home = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     // smooth-scroll anchor links within the page
     const onClick = (e) => {
@@ -164,9 +178,9 @@ const Home = () => {
   <div className="wrap nav">
     <div className="brand"><img className="logo" src="/logos/Maker Logo - 300 x 300 px - Official.png" alt="Maker Web Studios logo" />Maker Web Studios</div>
     <div className="nav-links"><a href="#build">The Build</a><a href="#pricing">Pricing</a><a href="#work">Work</a><a href="#operator">Who</a></div>
-    <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-primary">Free Audit</a>
+    <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-primary nav-cta">Free Audit</a><button className="mw-burger" aria-label="Menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(o => !o)}><span></span><span></span><span></span></button>
   </div>
-</nav>
+<div className={menuOpen ? "mw-mobile open" : "mw-mobile"}><a href="#build" onClick={() => setMenuOpen(false)}>The Build</a><a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a><a href="#work" onClick={() => setMenuOpen(false)}>Work</a><a href="#operator" onClick={() => setMenuOpen(false)}>Who</a><a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-primary" onClick={() => setMenuOpen(false)}>Free Audit</a></div></nav>
 
 
 <header className="hero">
