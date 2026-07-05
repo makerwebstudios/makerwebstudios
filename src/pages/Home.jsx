@@ -294,13 +294,13 @@ const Home = () => {
 <section id="work">
   <div className="wrap">
     <div className="ey">05 &mdash; The work</div>
-    <div className="sec-head"><h2 className="disp">Restaurants, trades, manufacturers, studios.</h2>
+    <div className="sec-head"><h2 className="disp">Product brands, restaurants, trades, manufacturers.</h2>
       <p className="lead">Every project started the same way: a great business with an online presence that undersold it.</p></div>
     <div className="proof-list">
-      <div className="prow"><span className="cn">Restaurants &amp; food</span><span className="cd">The digital front door and ordering flow rebuilt so demand stops leaking.</span><span className="tag">Hospitality</span></div>
-      <div className="prow"><span className="cn">Trades &amp; home services</span><span className="cd">A commodity trade site repositioned into a premium local brand.</span><span className="tag">Dated &rarr; premium</span></div>
+      <div className="prow"><span className="cn">Physical Products Brands</span><span className="cd">A cohesive identity and a store-ready presence built to sell what you make.</span><span className="tag">Product &middot; DTC</span></div>
+      <div className="prow"><span className="cn">Restaurants &amp; Food</span><span className="cd">The digital front door and ordering flow rebuilt so demand stops leaking.</span><span className="tag">Hospitality</span></div>
+      <div className="prow"><span className="cn">Trades &amp; Home Services</span><span className="cd">A commodity trade site repositioned into a premium local brand.</span><span className="tag">Dated &rarr; premium</span></div>
       <div className="prow"><span className="cn">Manufacturers</span><span className="cd">Full digital presence and lead infrastructure &mdash; certifications front and center.</span><span className="tag">B2B</span></div>
-      <div className="prow"><span className="cn">New &amp; bilingual brands</span><span className="cd">Cohesive, professional EN/ES sites &mdash; established from day one.</span><span className="tag">New &middot; EN/ES</span></div>
     </div>
   </div>
 </section>
