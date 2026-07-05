@@ -37,6 +37,8 @@ const CSS = `
   .mwbtn-ghost:hover{border-color:var(--ink);color:var(--ink);}
   .mwbtn-navy{background:var(--ink);color:var(--oat);}
   .mwbtn-navy:hover{background:#22314f;color:var(--oat);}
+  .mwbtn-white{background:#fff;color:var(--ink);}
+  .mwbtn-white:hover{background:var(--oat);color:var(--ink);}
   .nav-ctas{display:flex;align-items:center;gap:10px;}
   @media(max-width:760px){.nav-links{display:none;}}
   /* mobile menu */
@@ -124,6 +126,7 @@ const CSS = `
   .pcard.feat .desc{color:#94A3B8;}
   .pcard .mwbtn{width:100%;justify-content:center;}
   .pcard.feat .mwbtn-primary{background:var(--clay);color:#fff;}
+  .pcard.feat .mwbtn-primary:hover{background:var(--clay-d);color:#fff;}
   @media(max-width:820px){.pgrid{grid-template-columns:1fr;}}
 
   /* proof */
@@ -150,7 +153,9 @@ const CSS = `
   .cta .sub{color:#94A3B8;font-size:17px;margin:22px auto 0;max-width:52ch;}
   .cta .row{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap;}
   .cta .mwbtn-primary{background:var(--clay);color:#fff;padding:16px 30px;font-size:16px;}
+  .cta .mwbtn-primary:hover{background:var(--clay-d);color:#fff;}
   .cta .mwbtn-ghost{border-color:rgba(255,255,255,.3);color:var(--oat);padding:16px 30px;font-size:16px;}
+  .cta .mwbtn-white{padding:16px 30px;font-size:16px;}
   .cta .ey{justify-content:center;color:#FF8C33;}.cta .ey::before{background:#FF8C33;}
   .cta .fine{margin-top:22px;font-size:13px;color:var(--muted);}
 
@@ -338,7 +343,7 @@ const Home = () => {
     <p className="sub">Start with a free 15-minute audit &mdash; we'll show you exactly where your online presence is leaking, delivered within 48 hours.</p>
     <div className="row">
       <a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary">Start your Foundation &mdash; $2,500 &rarr;</a>
-      <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-ghost">Claim my free audit</a>
+      <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-white">Claim my free audit</a>
     </div>
     <p className="fine">No cost &middot; no pitch &middot; no commitment.</p>
   </div>
