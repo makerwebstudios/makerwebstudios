@@ -35,6 +35,9 @@ const CSS = `
   .mwbtn-primary:hover{background:var(--clay-d);}
   .mwbtn-ghost{border-color:var(--line);color:var(--ink);}
   .mwbtn-ghost:hover{border-color:var(--ink);}
+  .mwbtn-navy{background:var(--ink);color:var(--oat);}
+  .mwbtn-navy:hover{background:#22314f;}
+  .nav-ctas{display:flex;align-items:center;gap:10px;}
   @media(max-width:760px){.nav-links{display:none;}}
   /* mobile menu */
   .mw-burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;}
@@ -46,7 +49,7 @@ const CSS = `
   .mw-mobile a{padding:15px 0;font-size:16px;font-weight:600;color:var(--ink-soft);border-bottom:1px solid var(--line-soft);}
   .mw-mobile a.mwbtn{margin:16px 0;border-bottom:0;justify-content:center;color:#fff;}
   .mw-mobile.open{max-height:360px;}
-  @media(max-width:760px){.nav-cta{display:none !important;}.mw-burger{display:flex !important;}.mw-mobile{display:flex;}}
+  @media(max-width:760px){.nav-ctas{display:none !important;}.mw-burger{display:flex !important;}.mw-mobile{display:flex;}}
 
   /* hero */
   .hero{padding:78px 0 64px;position:relative;}
@@ -80,7 +83,7 @@ const CSS = `
 
   /* problem &mdash; two col */
   .two{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:44px;align-items:start;}
-  .two .big{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,34px);line-height:1.15;letter-spacing:-.01em;}
+  .two .big{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(28px,4.2vw,46px);line-height:1.1;letter-spacing:-.02em;}
   .two .body{color:var(--ink-soft);font-size:16px;line-height:1.7;}
   .two .body p{margin-bottom:14px;}
   @media(max-width:760px){.two{grid-template-columns:1fr;gap:24px;}}
@@ -178,9 +181,9 @@ const Home = () => {
   <div className="wrap nav">
     <div className="brand"><img className="logo" src="/logos/Maker Logo - 300 x 300 px - Official.png" alt="Maker Web Studios logo" />Maker Web Studios</div>
     <div className="nav-links"><a href="#build">The Build</a><a href="#pricing">Pricing</a><a href="#work">Work</a><a href="#operator">Who</a></div>
-    <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-primary nav-cta">Free Audit</a><button className="mw-burger" aria-label="Menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(o => !o)}><span></span><span></span><span></span></button>
+    <div className="nav-ctas"><a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary">$2,500 &middot; Get Started</a><a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-navy">Free Audit</a></div><button className="mw-burger" aria-label="Menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(o => !o)}><span></span><span></span><span></span></button>
   </div>
-<div className={menuOpen ? "mw-mobile open" : "mw-mobile"}><a href="#build" onClick={() => setMenuOpen(false)}>The Build</a><a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a><a href="#work" onClick={() => setMenuOpen(false)}>Work</a><a href="#operator" onClick={() => setMenuOpen(false)}>Who</a><a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-primary" onClick={() => setMenuOpen(false)}>Free Audit</a></div></nav>
+<div className={menuOpen ? "mw-mobile open" : "mw-mobile"}><a href="#build" onClick={() => setMenuOpen(false)}>The Build</a><a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a><a href="#work" onClick={() => setMenuOpen(false)}>Work</a><a href="#operator" onClick={() => setMenuOpen(false)}>Who</a><a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary" onClick={() => setMenuOpen(false)}>$2,500 &middot; Get Started</a><a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-navy" onClick={() => setMenuOpen(false)}>Free Audit</a></div></nav>
 
 
 <header className="hero">
@@ -191,7 +194,7 @@ const Home = () => {
       <p className="sub">One system for your brand, your website, and your Google presence &mdash; installed by an operator, not an agency.</p>
       <div className="hero-cta">
         <a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary">Start your Foundation &mdash; $2,500 &rarr;</a>
-        <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-ghost">Book a free audit</a>
+        <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-navy">Book a Call</a>
       </div>
       <div className="cred"><span className="dot"></span>16 years running a real business &middot; GMP &middot; ISO 9001 &middot; SQF &middot; Bilingual EN/ES</div>
     </div>
@@ -324,7 +327,7 @@ const Home = () => {
 
 <section className="cta">
   <div className="wrap">
-    <div className="ey">Limited &mdash; 3 new clients / month</div>
+    <div className="ey">Limited &mdash; 3 new clients per month</div>
     <h2 className="disp">Let's build the presence your work deserves.</h2>
     <p className="sub">Start with a free 15-minute audit &mdash; we'll show you exactly where your online presence is leaking, delivered within 48 hours.</p>
     <div className="row">
