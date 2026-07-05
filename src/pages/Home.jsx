@@ -26,7 +26,7 @@ const CSS = `
   /* nav */
   nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--oat) 88%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft);}
   .nav{display:flex;align-items:center;justify-content:space-between;height:68px;}
-  .brand{font-family:'Archivo',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;}
+  .brand{font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.015em;display:flex;align-items:center;gap:9px;}
   .brand .logo{height:32px;width:32px;border-radius:6px;display:block;flex-shrink:0;}
   .nav-links{display:flex;gap:30px;font-size:14px;font-weight:500;color:var(--ink-soft);}
   .nav-links a:hover{color:var(--ink);}
