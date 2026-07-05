@@ -195,11 +195,10 @@ const Home = () => {
       <nav>
   <div className="wrap nav">
     <div className="brand"><img className="logo" src="/logos/Maker Logo - 300 x 300 px - Official.png" alt="Maker Web Studios logo" />Maker Web Studios</div>
-    <div className="nav-links"><a href="#build">The Build</a><a href="#pricing">Pricing</a><a href="#work">Work</a><a href="#operator">About</a></div>
     <div className="nav-ctas"><a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary">$2,500 &middot; Get Started</a><a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-navy">Free Audit</a></div><button className="mw-burger" aria-label="Menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(o => !o)}><span></span><span></span><span></span></button>
   </div>
 </nav>
-      <div className={menuOpen ? "mw-mobile open" : "mw-mobile"}><a href="#build" onClick={() => setMenuOpen(false)}>The Build</a><a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a><a href="#work" onClick={() => setMenuOpen(false)}>Work</a><a href="#operator" onClick={() => setMenuOpen(false)}>About</a><a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary" onClick={() => setMenuOpen(false)}>$2,500 &middot; Get Started</a><a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-navy" onClick={() => setMenuOpen(false)}>Free Audit</a></div>
+      <div className={menuOpen ? "mw-mobile open" : "mw-mobile"}><a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary" onClick={() => setMenuOpen(false)}>$2,500 &middot; Get Started</a><a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-navy" onClick={() => setMenuOpen(false)}>Free Audit</a></div>
 
 
 <header className="hero">
