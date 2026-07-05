@@ -699,13 +699,6 @@ const Home = () => {
             ))}
           </div>
 
-          {/* Guarantee callout */}
-          <div style={{ borderLeft: "3px solid var(--industrial-orange)", background: "rgba(255,107,0,0.05)", padding: "1.25rem 1.75rem", borderRadius: "0 var(--border-radius) var(--border-radius) 0", marginBottom: "2.5rem" }}>
-            <p style={{ margin: 0, fontSize: "1rem", color: "rgba(255,255,255,0.8)", lineHeight: "1.7", fontWeight: "400" }}>
-              <strong style={{ color: "#fff" }}>90-day guarantee:</strong> If your Google Search Console impressions don&rsquo;t increase by at least 50% within 90 days of launch, we keep working &mdash; at no additional cost &mdash; until they do.
-            </p>
-          </div>
-
           {/* Footnote */}
           <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.35)", textAlign: "center", margin: 0 }}>
             Every project includes a QA gate at the end of each phase. Work doesn&rsquo;t advance until it passes.
@@ -756,7 +749,7 @@ const Home = () => {
               An operator who brands &mdash; not a coder who guessed.
             </h2>
             <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1.125rem", lineHeight: "1.75", maxWidth: "800px" }}>
-              Maker Web Studios was founded by Guillermo Aristi &mdash; a 16-year veteran who built and exited a regulated manufacturing operation in Texas, with GMP, ISO 9001, and SQF certifications. This isn&rsquo;t an agency that learned about business from a Google search. &ldquo;Niche down&rdquo; from a designer is a slogan; the same call from someone who&rsquo;s run the floor &mdash; margins, SKUs, supply chain, unit economics &mdash; is consulting. We understand the business behind the brand, which is why owners who make and sell real things come to us specifically. Design eye, web tech, and operator judgment &mdash; few people carry all three.
+              You&rsquo;ve read the story &mdash; here&rsquo;s why it matters for your project. Most agencies give creative opinions from the outside. We give them from inside the business, with 16 years of margins, SKUs, and supply chain behind them. &ldquo;Niche down&rdquo; from a designer is a slogan; from an operator who&rsquo;s run the floor, it&rsquo;s consulting. That&rsquo;s why owners who make and sell real things come to us specifically &mdash; design eye, web tech, and operator judgment, in one place.
             </p>
           </div>
 
