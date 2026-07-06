@@ -47,7 +47,7 @@ const CSS = `
   .mw-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
   .mw-burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
   .mw-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-  .mw-mobile{display:none;position:fixed;inset:0;z-index:40;flex-direction:column;padding:96px 32px 40px;background:var(--oat);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .28s ease,transform .28s ease,visibility .28s;overflow-y:auto;}
+  .mw-mobile{display:none;position:fixed;inset:0;z-index:40;flex-direction:column;padding:96px 32px 40px;background:var(--oat);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .28s ease,transform .28s ease,visibility .28s;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;}
   .mw-mobile a{padding:18px 0;font-size:23px;font-weight:700;font-family:'Archivo',sans-serif;color:var(--ink);border-bottom:1px solid var(--line-soft);}
   .mw-mobile a.mwbtn{margin-top:22px;border-bottom:0;justify-content:center;color:#fff;font-size:16px;font-weight:600;font-family:'Inter',sans-serif;}
   .mw-mobile a.mwbtn + a.mwbtn{margin-top:12px;}
@@ -195,8 +195,25 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (!menuOpen) return;
+    // iOS-safe scroll lock: pin the body (overflow:hidden alone doesn't hold on mobile Safari)
+    const y = window.scrollY;
+    const b = document.body;
+    b.style.position = "fixed";
+    b.style.top = `-${y}px`;
+    b.style.left = "0";
+    b.style.right = "0";
+    b.style.width = "100%";
+    b.style.overflow = "hidden";
+    return () => {
+      b.style.position = "";
+      b.style.top = "";
+      b.style.left = "";
+      b.style.right = "";
+      b.style.width = "";
+      b.style.overflow = "";
+      window.scrollTo(0, y);
+    };
   }, [menuOpen]);
 
   return (
