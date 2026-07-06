@@ -50,7 +50,10 @@ const CSS = `
   .mw-mobile{display:none;position:fixed;inset:0;z-index:40;flex-direction:column;padding:96px 32px 40px;background:var(--oat);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .28s ease,transform .28s ease,visibility .28s;overflow-y:auto;}
   .mw-mobile a{padding:18px 0;font-size:23px;font-weight:700;font-family:'Archivo',sans-serif;color:var(--ink);border-bottom:1px solid var(--line-soft);}
   .mw-mobile a.mwbtn{margin-top:22px;border-bottom:0;justify-content:center;color:#fff;font-size:16px;font-weight:600;font-family:'Inter',sans-serif;}
-  .mw-mobile a.mwbtn:last-child{margin-top:12px;}
+  .mw-mobile a.mwbtn + a.mwbtn{margin-top:12px;}
+  .mw-mobile .mm-foot{margin-top:auto;padding-top:30px;display:flex;flex-direction:column;gap:6px;}
+  .mw-mobile .mm-foot a{padding:0;border:0;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:var(--clay);}
+  .mw-mobile .mm-foot span{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;}
   .mw-mobile.open{opacity:1;visibility:visible;transform:translateY(0);}
   @media(max-width:760px){.nav-ctas{display:none !important;}.mw-burger{display:flex !important;}.mw-mobile{display:flex;}}
 
@@ -205,7 +208,18 @@ const Home = () => {
     <div className="nav-ctas"><a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary">$2,500 &middot; Get Started</a><a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-navy">Free Audit</a></div><button className="mw-burger" aria-label="Menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(o => !o)}><span></span><span></span><span></span></button>
   </div>
 </nav>
-      <div className={menuOpen ? "mw-mobile open" : "mw-mobile"}><a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary" onClick={() => setMenuOpen(false)}>$2,500 &middot; Get Started</a><a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-navy" onClick={() => setMenuOpen(false)}>Free Audit</a></div>
+      <div className={menuOpen ? "mw-mobile open" : "mw-mobile"}>
+        <a href="#build" onClick={() => setMenuOpen(false)}>The Build</a>
+        <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
+        <a href="#work" onClick={() => setMenuOpen(false)}>Work</a>
+        <a href="#operator" onClick={() => setMenuOpen(false)}>About</a>
+        <a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary" onClick={() => setMenuOpen(false)}>Start your Foundation &mdash; $2,500</a>
+        <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-navy" onClick={() => setMenuOpen(false)}>Book a Free Audit</a>
+        <div className="mm-foot">
+          <a href="mailto:hello@makerwebstudios.com">hello@makerwebstudios.com</a>
+          <span>Built in Texas &middot; Serving worldwide</span>
+        </div>
+      </div>
 
 
 <header className="hero">
