@@ -55,15 +55,22 @@ const CSS = `
   @media(max-width:760px){.nav-ctas{display:none !important;}.mw-burger{display:flex !important;}.mw-mobile{display:flex;}}
 
   /* hero */
-  .hero{padding:78px 0 64px;position:relative;}
-  .hero-grid{display:grid;grid-template-columns:1.3fr .95fr;gap:56px;align-items:center;}
+  .hero{padding:58px 0 66px;position:relative;overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;z-index:0;background:
+    radial-gradient(58% 50% at 85% 8%, rgba(255,107,0,.12), transparent 70%),
+    radial-gradient(48% 42% at 4% 98%, rgba(15,23,42,.055), transparent 70%),
+    linear-gradient(180deg,#ffffff 0%, var(--oat) 64%);}
+  .hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.6;
+    background-image:radial-gradient(circle at 1px 1px, rgba(15,23,42,.065) 1px, transparent 0);background-size:22px 22px;
+    -webkit-mask-image:linear-gradient(180deg,#000,transparent 78%);mask-image:linear-gradient(180deg,#000,transparent 78%);}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.3fr .95fr;gap:56px;align-items:center;}
   .hero h1{font-size:clamp(44px,6.4vw,84px);margin:20px 0 0;}
   .hero h1 .l2{color:var(--clay);}
   .hero .sub{font-size:clamp(17px,1.6vw,20px);color:var(--ink-soft);max-width:30ch;margin:26px 0 0;line-height:1.55;}
   .hero-cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;}
   .hero-cta .mwbtn{padding:14px 24px;font-size:15px;}
-  .cred{margin-top:26px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;}
-  .cred .dot{width:6px;height:6px;border-radius:50%;background:var(--pine);}
+  .cred{margin-top:32px;display:flex;flex-wrap:wrap;gap:8px;}
+  .cred .chip{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:rgba(15,23,42,.045);border:1px solid var(--line);border-radius:100px;padding:6px 12px;}
   /* spec card */
   .spec{background:var(--pine);color:var(--oat);border-radius:16px;padding:30px 30px 26px;box-shadow:0 24px 60px -20px rgba(2,6,23,.55);}
   .spec .sh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:14px;margin-bottom:16px;}
@@ -211,7 +218,7 @@ const Home = () => {
         <a href="https://buy.stripe.com/6oUbJ3dnzd6U7BW7ydejK04" className="mwbtn mwbtn-primary">Start your Foundation &mdash; $2,500 &rarr;</a>
         <a href="https://calendly.com/hello-makerwebstudios/30min" className="mwbtn mwbtn-navy">Book a Call</a>
       </div>
-      <div className="cred"><span className="dot"></span>16 years running a real business &middot; GMP &middot; ISO 9001 &middot; SQF &middot; Bilingual EN/ES</div>
+      <div className="cred"><span className="chip">16 yrs operating</span><span className="chip">GMP</span><span className="chip">ISO 9001</span><span className="chip">SQF</span><span className="chip">EN / ES</span></div>
     </div>
 
     <aside className="spec">
