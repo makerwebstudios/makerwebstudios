@@ -6,17 +6,17 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://makerwebstudios.com/portfolio</loc>
+    <loc>https://makerwebstudios.com/portfolio/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://makerwebstudios.com/mfg</loc>
+    <loc>https://makerwebstudios.com/mfg/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://makerwebstudios.com/privacy</loc>
+    <loc>https://makerwebstudios.com/privacy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
