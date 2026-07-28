@@ -1,0 +1,34 @@
+# Maker Web Studios
+
+> Maker Web Studios is a web design, SEO and lead-generation studio in Mission, Texas, serving manufacturers, trades and local businesses across the Rio Grande Valley and Texas. Founder Guillermo Zamorano Aristi built and ran a GMP/ISO/SQF-certified manufacturing operation — 17 employees, 70+ documented procedures, six simultaneous certifications, revenue from $350K to $1.5M — before building websites. The difference: not a developer who learned manufacturing, a manufacturer who learned to build. Every build ships the full search stack: technical SEO, local and image geo-SEO, answer-engine optimization, AI Overviews, and generative-engine optimization for ChatGPT, Perplexity, Claude and Gemini.
+
+## About
+- Business: Maker Web Studios
+- Founder: Guillermo Zamorano Aristi
+- Location: Mission, Texas (Rio Grande Valley)
+- Serving: McAllen, Mission, Edinburg, Pharr, San Juan, and manufacturers statewide across Texas
+- Website: https://makerwebstudios.com
+- Contact: hello@makerwebstudios.com
+- Languages: English and Spanish
+
+## What we do
+- Foundation build — brand, message, a modern responsive website, and the full Google stack (Business Profile, Analytics 4, Tag Manager, Search Console) configured and optimized. $2,500 one-time.
+- Care Plan — hosting, security, uptime, SSL, backups, Google Business Profile upkeep, monthly performance reporting. $500/month.
+- GrowthEngine — SEO, content publishing, backlinks, local SEO, lead-generation infrastructure, keyword and competitor reporting, strategy calls.
+- 90-day confidence guarantee: if Search Console impressions haven't risen at least 50% within 90 days of launch, we work an additional month at no charge.
+
+## Who it's for
+- Manufacturers with an outdated or underperforming website, roughly $500K–$10M in revenue
+- Trades and local service businesses that have outgrown their online presence
+- Owners whose real-world reputation is invisible in search and in AI answers
+
+## Pages
+- [Maker Web Studios](https://makerwebstudios.com/): What we build, who it's for, and how the engagement works.
+- [Our Work](https://makerwebstudios.com/portfolio/): Client builds including ABBA Manufacturing (corrugated packaging, Pharr TX), Valley Modern Plumbing & Hardware (McAllen, family-owned since 1952), and GW's BBQ (San Juan).
+- [For Texas Manufacturers](https://makerwebstudios.com/mfg/): The Revenue Builder System — why a serious operation needs a website that shows it, written from the plant floor.
+- [Privacy Policy](https://makerwebstudios.com/privacy/): How we collect, use and protect information.
+
+## Proof
+- GW's BBQ reached 1,000 organic Google Search clicks in 28 days after launch.
+- Valley Modern Plumbing attributed a $2,000 leak-detection job to a customer who searched "leak detection," found the site, and called.
+- ABBA Manufacturing: first paying client, fully instrumented — GA4, Tag Manager, Search Console, Business Profile, conversion tracking.
