@@ -157,6 +157,16 @@ const CSS = `
   .op .stat .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace;margin-top:4px;}
   @media(max-width:760px){.op{grid-template-columns:1fr;gap:34px;}}
 
+  /* FAQ */
+  .faq{max-width:820px;margin:40px auto 0;}
+  .faq-item{border-bottom:1px solid var(--line,rgba(15,23,42,.12));padding:4px 0;}
+  .faq-item summary{list-style:none;cursor:pointer;padding:20px 34px 20px 0;position:relative;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary h3{font-size:clamp(17px,2vw,20px);font-weight:600;margin:0;display:inline;}
+  .faq-item summary::after{content:'+';position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:24px;line-height:1;opacity:.5;}
+  .faq-item[open] summary::after{content:'−';}
+  .faq-item p{margin:0 0 22px;max-width:70ch;line-height:1.65;color:var(--muted,#5b6472);}
+
   /* CTA */
   .cta{background:var(--ink);color:var(--oat);text-align:center;}
   .cta h2{color:#fff;font-size:clamp(34px,5.4vw,68px);max-width:16ch;margin:20px auto 0;}
@@ -179,6 +189,35 @@ const CSS = `
 
   @media(max-width:600px){.wrap{padding:0 20px;}.hero h1{font-size:clamp(40px,12vw,58px);line-height:1.0;}.hero{padding:44px 0 48px;}.sec-head h2{font-size:28px;}}
 `;
+
+// Answer-engine content. Each answer is written to stand alone: if an AI lifts
+// just this paragraph, it should still be a complete, accurate answer.
+const FAQS = [
+  {
+    q: 'What does a website from Maker Web Studios cost?',
+    a: 'A Foundation build is $2,500 one-time and includes brand and messaging, a modern responsive website, and the full Google stack — Business Profile, Analytics 4, Tag Manager and Search Console — configured and optimized. The Care Plan is $500/month for hosting, security, backups, Google Business Profile upkeep and a monthly performance report. Most clients take both.',
+  },
+  {
+    q: 'How long does a website build take?',
+    a: 'A Foundation build typically takes two to four weeks from kickoff to launch, depending on how quickly photos, copy and Google account access come together. You get a 30-day proof report after launch showing what changed in search.',
+  },
+  {
+    q: 'What makes Maker Web Studios different from other web designers?',
+    a: 'Guillermo Zamorano Aristi ran a GMP, ISO and SQF-certified manufacturing operation before building websites — 17 employees, 70+ documented procedures, revenue grown from $350K to $1.5M. Most agencies are developers who learned manufacturing. This is a manufacturer who learned to build. That means the discovery conversation is about lead time, capacity and margin, not fonts.',
+  },
+  {
+    q: 'Do you work with manufacturers outside Texas?',
+    a: 'Yes. Maker Web Studios is based in Mission, Texas and serves the Rio Grande Valley and manufacturers statewide, but the work is remote and clients outside Texas are welcome.',
+  },
+  {
+    q: 'Will my site show up in ChatGPT and other AI answers?',
+    a: 'That is an explicit part of every build. Every site ships the full search stack: technical SEO, local and image geo-SEO, answer-engine optimization, structured data for Google AI Overviews, and an llms.txt file plus crawler access for ChatGPT, Perplexity, Claude and Gemini. Most agencies stop at on-page SEO.',
+  },
+  {
+    q: 'What happens if the website does not work?',
+    a: 'Every build carries a 90-day confidence guarantee: if Google Search Console impressions have not increased by at least 50% within 90 days of launch, Maker Web Studios works an additional month at no charge.',
+  },
+];
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -372,6 +411,24 @@ const Home = () => {
   </div>
 </section>
 
+
+{/* FAQ — answer-engine optimization. These are the questions a buyer actually
+    types into Google or asks ChatGPT. Question-shaped H3s plus FAQPage schema
+    are what let an answer engine lift a direct answer instead of guessing. */}
+<section id="faq">
+  <div className="wrap">
+    <div className="ey">05 &mdash; Straight answers</div>
+    <div className="sec-head"><h2 className="disp">Questions we get before the first call.</h2></div>
+    <div className="faq">
+      {FAQS.map((f) => (
+        <details className="faq-item" key={f.q}>
+          <summary><h3>{f.q}</h3></summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
 
 <section className="cta">
   <div className="wrap">

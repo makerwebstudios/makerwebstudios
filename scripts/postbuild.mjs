@@ -101,9 +101,20 @@ const wordCount = (html) =>
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
+// The FAQPage JSON-LD lives in index.html, which is the shell for every route —
+// so without this, /portfolio, /mfg and /privacy would all CLAIM an FAQ they
+// don't display. Structured data that doesn't match the visible page is a
+// Google violation, so it's stripped from every route except the homepage.
+function stripFaqSchema(html) {
+  return html.replace(
+    /<script type="application\/ld\+json">\s*\{[^<]*?"@type":\s*"FAQPage"[\s\S]*?<\/script>\s*/i,
+    '');
+}
+
 /** Rewrite title + description (and their og:/twitter: twins) for a route. */
 function applyMeta(html, route) {
   const m = ROUTE_META[route];
+  if (route !== '') html = stripFaqSchema(html);
   if (!m) return html;
   let out = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${esc(m.title)}</title>`);
   for (const attr of ['name="description"', 'property="og:description"',
